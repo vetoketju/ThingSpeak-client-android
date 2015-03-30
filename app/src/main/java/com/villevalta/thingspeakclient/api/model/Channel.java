@@ -1,25 +1,48 @@
 package com.villevalta.thingspeakclient.api.model;
 
+import com.google.gson.annotations.SerializedName;
+import com.villevalta.thingspeakclient.R;
+import com.villevalta.thingspeakclient.model.ListViewable;
+
 import java.util.ArrayList;
 import java.util.Date;
 
 /**
  * Created by villevalta on 24.3.2015.
  */
-public class Channel {
+public class Channel implements ListViewable{
 
+	@SerializedName("id")
 	private int id;
+
+	@SerializedName("name")
 	private String name;
+
+	@SerializedName("description")
 	private String description;
+
+	@SerializedName("username")
 	private String username;
 
-	private float latitude;
-	private float longitude;
-	private int elevation;
+	@SerializedName("latitude")
+	private String latitude;
 
+	@SerializedName("longitude")
+	private String longitude;
+
+	@SerializedName("elevation")
+	private String elevation;
+
+	@SerializedName("created_at")
 	private Date created_at; // "created_at": "2010-12-13T20:20:06-05:00"
+
+	@SerializedName("last_entry_id")
 	private int last_entry_id;
+
+	@SerializedName("ranking")
 	private int ranking;
+
+	@SerializedName("tags")
 	private ArrayList<Tag> tags = new ArrayList<Tag>();
 
 	public Channel(int id) {
@@ -58,27 +81,27 @@ public class Channel {
 		this.username = username;
 	}
 
-	public float getLatitude() {
+	public String getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(float latitude) {
+	public void setLatitude(String latitude) {
 		this.latitude = latitude;
 	}
 
-	public float getLongitude() {
+	public String getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(float longitude) {
+	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
 
-	public int getElevation() {
+	public String getElevation() {
 		return elevation;
 	}
 
-	public void setElevation(int elevation) {
+	public void setElevation(String elevation) {
 		this.elevation = elevation;
 	}
 
@@ -112,5 +135,10 @@ public class Channel {
 
 	public void setTags(ArrayList<Tag> tags) {
 		this.tags = tags;
+	}
+
+	@Override
+	public int getViewType() {
+		return R.layout.listitem_channel;
 	}
 }

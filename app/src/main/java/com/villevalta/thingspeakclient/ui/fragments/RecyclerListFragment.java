@@ -1,27 +1,25 @@
-package com.villevalta.thingspeakclient.ui;
+package com.villevalta.thingspeakclient.ui.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.villevalta.thingspeakclient.ui.adapters.RecyclerListAdapter;
+import com.villevalta.thingspeakclient.R;
+import com.villevalta.thingspeakclient.ui.ListContentProvider;
+import com.villevalta.thingspeakclient.ui.views.RecyclerListView;
 
 /**
  * Created by villevalta on 25.3.2015.
  */
-public class RecyclerListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public abstract class RecyclerListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
-	private RecyclerView mRecyclerView;
+	protected RecyclerListView mRecyclerView;
 	private SwipeRefreshLayout mSwipeRefreshLayout;
-	private RecyclerListAdapter mListAdapter;
 
-	private ListContentProvider listContentProvider;
-
-	private boolean adapterInitialized;
+	protected ListContentProvider mListContentProvider;
 
 
 	public RecyclerListFragment(){
@@ -36,14 +34,21 @@ public class RecyclerListFragment extends Fragment implements SwipeRefreshLayout
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		return null;
+		View v = inflater.inflate(R.layout.fragment_recyclerlist, container, false);
+
+		mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.SwipeRefresh);
+		mRecyclerView = (RecyclerListView) v.findViewById(R.id.RecyclerListView);
+
+		if(mListContentProvider != null) mRecyclerView.setListContentProvider(mListContentProvider);
+
+		return v;
 	}
 
 
 	@Override
 	public void onResume(){
 		super.onResume();
-		if(mRecyclerView != null && mRecyclerView.getAdapter() == null) mRecyclerView.setAdapter(mListAdapter);
+		//if(mRecyclerView != null && mRecyclerView.getAdapter() == null) mRecyclerView.setAdapter(mListAdapter);
 	}
 
 	@Override
@@ -61,7 +66,7 @@ public class RecyclerListFragment extends Fragment implements SwipeRefreshLayout
 	public void onRefresh() {
 
 	}
-
+/*
 	private void tryInitAdapter() {
 		if (!adapterInitialized && mRecyclerView != null && listContentProvider != null) {
 			mSwipeRefreshLayout.setEnabled(listContentProvider.isRefreshable());
@@ -70,8 +75,5 @@ public class RecyclerListFragment extends Fragment implements SwipeRefreshLayout
 			adapterInitialized = true;
 		}
 	}
-
-	public void setListContentProvider(ListContentProvider listContentProvider) {
-		this.listContentProvider = listContentProvider;
-	}
+*/
 }

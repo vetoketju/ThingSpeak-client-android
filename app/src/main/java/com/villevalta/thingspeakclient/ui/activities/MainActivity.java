@@ -1,4 +1,4 @@
-package com.villevalta.thingspeakclient;
+package com.villevalta.thingspeakclient.ui.activities;
 
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -9,6 +9,8 @@ import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 
+import com.villevalta.thingspeakclient.R;
+import com.villevalta.thingspeakclient.ui.fragments.ChannelsFragment;
 import com.villevalta.thingspeakclient.ui.navigation.DrawerNavItem;
 import com.villevalta.thingspeakclient.ui.navigation.NavigationDrawerFragment;
 
@@ -34,23 +36,26 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		mToolbar = (Toolbar) findViewById(R.id.toolbar); // Toolbar TODO MAKE it in XML
+		mToolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(mToolbar);
 
-		mNavigationDrawerFragment = (NavigationDrawerFragment)getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
+		mFragmentManager = getSupportFragmentManager();
+
+		mNavigationDrawerFragment = (NavigationDrawerFragment) mFragmentManager.findFragmentById(R.id.navigation_drawer);
 
 
-		// TODO LISÄÄ TÄSSÄ NIITÄ FRAGMENTTEJA JOITA NÄYTETÄÄN!
+		mNavigationDrawerFragment.addNavItem(new DrawerNavItem("Channels",R.drawable.ic_drawer,ChannelsFragment.class));
+		mNavigationDrawerFragment.addNavItem(new DrawerNavItem("Channels two",R.drawable.ic_drawer,ChannelsFragment.class));
 
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
 
 		if(savedInstanceState == null){
-			mNavigationDrawerFragment.setSelectedPosition(0);
+			mNavigationDrawerFragment.selectItem(0);
 			mTitle = getTitle();
 		}else{
 			mCurrentActiveFragment = mFragmentManager.findFragmentById(R.id.container);
-
+			// TODO: add listener for toolbar to hide when scrolling
 			if(savedInstanceState.containsKey("title")) mTitle = savedInstanceState.getString("title");
 		}
 	}
@@ -66,13 +71,14 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 		// update the main content by replacing fragments
 		try {
 			mTitle = selected.getTitle();
-			//toolbar.resetScroll();
+			//toolbar.resetScroll();// TODO: Make the Toolbar hide when scrolling
 			boolean popped = mFragmentManager.popBackStackImmediate(mTitle.toString(),0);
 			if(!popped){
 				setWindowTitle(mTitle.toString());
 				mCurrentActiveFragment = selected.getFragmentClass().newInstance();
 
 				/*
+				// TODO: Make the Toolbar hide when scrolling:
 				if(currentActiveFragment instanceof BaseRecycleListFragment){
 					((BaseRecycleListFragment)currentActiveFragment).addContentScrollListener(toolbar);
 					((BaseRecycleListFragment)currentActiveFragment).setHasHideableToolbar(true);

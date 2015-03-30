@@ -75,9 +75,6 @@ public class NavigationDrawerFragment extends Fragment {
 			mCurrentSelectedPosition = savedInstanceState.getInt(STATE_SELECTED_POSITION);
 			mFromSavedInstanceState = true;
 		}
-
-		// Select either the default item (0) or the last selected item.
-		selectItem(mCurrentSelectedPosition);
 	}
 
 	@Override
@@ -192,10 +189,10 @@ public class NavigationDrawerFragment extends Fragment {
 		setSelectedPosition(pos);
 	}
 
-	private void selectItem(int position) {
+	public void selectItem(int position) {
 		if(mCurrentSelectedPosition == position){
 			// Just close the drawer if the position is the same as before
-			mDrawerLayout.closeDrawer(mFragmentContainerView);
+			if(mDrawerLayout.isDrawerOpen(mFragmentContainerView)) mDrawerLayout.closeDrawer(mFragmentContainerView);
 			return;
 		}
 		mCurrentSelectedPosition = position;

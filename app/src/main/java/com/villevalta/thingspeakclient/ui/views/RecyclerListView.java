@@ -11,22 +11,22 @@ import com.villevalta.thingspeakclient.ui.adapters.RecyclerListAdapter;
 /**
  * Created by villevalta on 25.3.2015.
  */
-public class MyRecyclerView extends RecyclerView {
+public class RecyclerListView extends RecyclerView {
 
 	private RecyclerListAdapter mListAdapter;
-	private ListContentProvider listContentProvider;
+	private ListContentProvider mListContentProvider;
 
-	public MyRecyclerView(Context context) {
+	public RecyclerListView(Context context) {
 		super(context);
 		init();
 	}
 
-	public MyRecyclerView(Context context, AttributeSet attrs) {
+	public RecyclerListView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init();
 	}
 
-	public MyRecyclerView(Context context, AttributeSet attrs, int defStyle) {
+	public RecyclerListView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		init();
 	}
@@ -38,7 +38,8 @@ public class MyRecyclerView extends RecyclerView {
 	}
 
 	public void setListContentProvider(ListContentProvider listContentProvider) {
-		this.listContentProvider = listContentProvider;
-		mListAdapter = new RecyclerListAdapter(listContentProvider);
+		this.mListContentProvider = listContentProvider;
+		this.mListAdapter = new RecyclerListAdapter(mListContentProvider);
+		setAdapter(mListAdapter);
 	}
 }

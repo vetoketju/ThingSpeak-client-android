@@ -34,7 +34,7 @@ public class ListContentProvider extends ArrayList<ListViewable> {
 	@Override
 	public boolean addAll(final Collection<? extends ListViewable> collection) {
 		boolean result = super.addAll(collection);
-		if(result && mRecyclerListAdapter != null) mRecyclerListAdapter.notifyItemRangeInserted(size() - collection.size(), collection.size());
+		if(result && mRecyclerListAdapter != null) mRecyclerListAdapter.notifyDataSetChanged();//mRecyclerListAdapter.notifyItemRangeInserted(size() - collection.size(), collection.size());
 		return result;
 	}
 

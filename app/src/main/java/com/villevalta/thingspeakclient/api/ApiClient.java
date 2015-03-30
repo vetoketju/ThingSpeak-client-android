@@ -25,7 +25,7 @@ public class ApiClient {
 	public static ThingSpeakApiInterface getInstance() {
 		if (clientInstance == null) {
 			RestAdapter restAdapter = new RestAdapter.Builder()
-					.setEndpoint("https://api.thingspeak.com")
+					.setEndpoint("https://api.thingspeak.com").setLogLevel(RestAdapter.LogLevel.FULL)
 					//.setConverter()
 					.build();
 
@@ -49,7 +49,7 @@ public class ApiClient {
 		*/
 
 		@GET("/" + ENDPOINT_CHANNELS + "/" + "public" + MARKUP)
-		void getPublicChannels(@Query("page") int page, Callback<List<Channel>> callback);
+		void getPublicChannels(@Query("page") int page, Callback<PaginatedResponce<Channel>> callback);
 
 		@GET("/" + ENDPOINT_CHANNELS + "/" + "public" + MARKUP)
 		void getPublicChannelsByUsername(@Query("page") int page, @Query("username") String username, Callback<List<Channel>> callback);

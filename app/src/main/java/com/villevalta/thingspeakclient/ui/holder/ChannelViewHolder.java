@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 import com.villevalta.thingspeakclient.R;
 import com.villevalta.thingspeakclient.api.model.Channel;
+import com.villevalta.thingspeakclient.api.model.Tag;
 import com.villevalta.thingspeakclient.model.ListViewable;
 
 /**
@@ -17,6 +18,7 @@ public class ChannelViewHolder extends ViewHolder {
 	private TextView mTitle;
 	private TextView mDescription;
 	private TextView mUsername;
+	private TextView mTags;
 
 	public ChannelViewHolder(View itemView) {
 		super(itemView);
@@ -27,14 +29,23 @@ public class ChannelViewHolder extends ViewHolder {
 		if(mTitle == null) mTitle = (TextView) root.findViewById(R.id.title);
 		if(mDescription == null) mDescription= (TextView) root.findViewById(R.id.description);
 		if(mUsername  == null) mUsername = (TextView) root.findViewById(R.id.username);
+		if(mTags == null) mTags = (TextView) root.findViewById(R.id.tags);
 	}
 
 	@Override
 	public void bind(ListViewable data) {
 		this.mChannel = (Channel) data;
+
 		mTitle.setText(mChannel.getName());
 		mDescription.setText(mChannel.getDescription());
-		mUsername.setText(mChannel.getUsername());
+		mUsername.setText("By " + mChannel.getUsername());
+
+		String tags = "";
+		for(int i = 0; i < mChannel.getTags().size(); i++){
+			tags += mChannel.getTags().get(i).getName() + (mChannel.getTags().size() - 1 == i ? "" : ", ");
+		}
+
+		mTags.setText(tags);
 	}
 
 
