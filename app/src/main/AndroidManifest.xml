@@ -15,6 +15,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.activities.ChannelActivity"/>
+        <activity android:name=".ui.activities.SearchActivity"/>
+        <activity android:name=".ui.activities.UserActivity"/>
     </application>
 
     <!-- Permissions -->

@@ -4,7 +4,7 @@ package com.villevalta.thingspeakclient.api.model;
  * Created by villevalta on 24.3.2015.
  */
 public class Pagination {
-	private int current_page = 1; // Paging starts at 1
+	private int current_page;
 	private int per_page;
 	private int total_entries;
 
@@ -32,19 +32,7 @@ public class Pagination {
 		this.total_entries = total_entries;
 	}
 
-	public Pagination increase(){
-		current_page++;
-		return this;
-	}
-
-	public Pagination decrease(){
-		current_page--;
-		return this;
-	}
-
-	public Pagination reset(){
-		current_page = 1;
-		total_entries = 0;
-		return this;
+	public boolean isLastPage(){
+		return current_page >= (int) (Math.ceil(total_entries / per_page));
 	}
 }

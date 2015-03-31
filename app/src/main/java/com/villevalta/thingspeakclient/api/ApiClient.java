@@ -1,5 +1,6 @@
 package com.villevalta.thingspeakclient.api;
 
+import com.villevalta.thingspeakclient.BuildConfig;
 import com.villevalta.thingspeakclient.api.model.Channel;
 
 import java.util.List;
@@ -18,14 +19,15 @@ public class ApiClient {
 
 	private static final String ENDPOINT_CHANNELS = "channels";
 	private static final String ENDPOINT_USERS = "users";
-	private static final String ENDPOINT_CHARTS = "charts";
+	private static final String ENDPOINT_FEEDS = "feeds";
 	private static final String MARKUP = ".json";
 
 
 	public static ThingSpeakApiInterface getInstance() {
 		if (clientInstance == null) {
 			RestAdapter restAdapter = new RestAdapter.Builder()
-					.setEndpoint("https://api.thingspeak.com").setLogLevel(RestAdapter.LogLevel.FULL)
+					.setEndpoint("https://api.thingspeak.com")
+					.setLogLevel(BuildConfig.DEBUG ? RestAdapter.LogLevel.BASIC : RestAdapter.LogLevel.NONE)
 					//.setConverter()
 					.build();
 
@@ -39,7 +41,7 @@ public class ApiClient {
 
 		/*
 		    page (integer) Page number to retrieve (optional)
-			tag (string) Name of tag to search for (optional) -> etsi by tag
+			tag (string) Name of tag to search for (optional)
 			username (string) Person's username that you want to search Channels for (optional) -> must be exact
 
 			You can also search for Channels within a certain distance of a location by including the following location parameters:

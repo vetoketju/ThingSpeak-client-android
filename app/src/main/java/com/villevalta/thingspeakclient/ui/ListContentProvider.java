@@ -1,5 +1,6 @@
 package com.villevalta.thingspeakclient.ui;
 
+import com.villevalta.thingspeakclient.api.model.Pagination;
 import com.villevalta.thingspeakclient.model.ListViewable;
 import com.villevalta.thingspeakclient.ui.adapters.RecyclerListAdapter;
 
@@ -13,6 +14,7 @@ public class ListContentProvider extends ArrayList<ListViewable> {
 
 	private RecyclerListAdapter mRecyclerListAdapter = null;
 	private boolean refreshable;
+	private Pagination mPagination;
 
 	public void setAdapter(RecyclerListAdapter adapter){
 		this.mRecyclerListAdapter = adapter;
@@ -34,7 +36,7 @@ public class ListContentProvider extends ArrayList<ListViewable> {
 	@Override
 	public boolean addAll(final Collection<? extends ListViewable> collection) {
 		boolean result = super.addAll(collection);
-		if(result && mRecyclerListAdapter != null) mRecyclerListAdapter.notifyDataSetChanged();//mRecyclerListAdapter.notifyItemRangeInserted(size() - collection.size(), collection.size());
+		if(result && mRecyclerListAdapter != null) mRecyclerListAdapter.notifyItemRangeInserted(size() - collection.size(), collection.size());
 		return result;
 	}
 
@@ -81,5 +83,13 @@ public class ListContentProvider extends ArrayList<ListViewable> {
 
 	public boolean isRefreshable() {
 		return refreshable;
+	}
+
+	public Pagination getPagination() {
+		return mPagination;
+	}
+
+	public void setPagination(Pagination pagination) {
+		mPagination = pagination;
 	}
 }

@@ -4,15 +4,18 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 
 import com.villevalta.thingspeakclient.R;
-import com.villevalta.thingspeakclient.ui.fragments.ChannelsFragment;
+import com.villevalta.thingspeakclient.ui.fragments.PublicChannelsFragment;
+import com.villevalta.thingspeakclient.ui.fragments.RecyclerListFragment;
 import com.villevalta.thingspeakclient.ui.navigation.DrawerNavItem;
 import com.villevalta.thingspeakclient.ui.navigation.NavigationDrawerFragment;
+import com.villevalta.thingspeakclient.ui.views.HideableToolbar;
 
 
 public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks, FragmentManager.OnBackStackChangedListener {
@@ -24,7 +27,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
 	private FragmentManager mFragmentManager;
 	private Fragment mCurrentActiveFragment = null;
-	private Toolbar mToolbar;
+	private HideableToolbar mToolbar;
 
 	/**
 	 * Used to store the last screen title. For use in {@link #restoreActionBar()}.
@@ -36,16 +39,15 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		mToolbar = (Toolbar) findViewById(R.id.toolbar);
+		mToolbar = (HideableToolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(mToolbar);
 
 		mFragmentManager = getSupportFragmentManager();
 
 		mNavigationDrawerFragment = (NavigationDrawerFragment) mFragmentManager.findFragmentById(R.id.navigation_drawer);
 
-
-		mNavigationDrawerFragment.addNavItem(new DrawerNavItem("Channels",R.drawable.ic_drawer,ChannelsFragment.class));
-		mNavigationDrawerFragment.addNavItem(new DrawerNavItem("Channels two",R.drawable.ic_drawer,ChannelsFragment.class));
+		mNavigationDrawerFragment.addNavItem(new DrawerNavItem("Public Channels",R.drawable.tags_555555_64,PublicChannelsFragment.class));
+		mNavigationDrawerFragment.addNavItem(new DrawerNavItem("Channels two Test",R.drawable.tags_555555_64,PublicChannelsFragment.class));
 
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
@@ -71,19 +73,16 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 		// update the main content by replacing fragments
 		try {
 			mTitle = selected.getTitle();
-			//toolbar.resetScroll();// TODO: Make the Toolbar hide when scrolling
+			mToolbar.resetScroll();
 			boolean popped = mFragmentManager.popBackStackImmediate(mTitle.toString(),0);
 			if(!popped){
 				setWindowTitle(mTitle.toString());
 				mCurrentActiveFragment = selected.getFragmentClass().newInstance();
 
-				/*
-				// TODO: Make the Toolbar hide when scrolling:
-				if(currentActiveFragment instanceof BaseRecycleListFragment){
-					((BaseRecycleListFragment)currentActiveFragment).addContentScrollListener(toolbar);
-					((BaseRecycleListFragment)currentActiveFragment).setHasHideableToolbar(true);
+				if(mCurrentActiveFragment instanceof RecyclerListFragment){
+					((RecyclerListFragment)mCurrentActiveFragment).setmHideableToolbar(mToolbar);
 				}
-				*/
+
 				mFragmentManager.beginTransaction().replace(R.id.container, mCurrentActiveFragment).addToBackStack(mTitle.toString()).commit();
 			}else{
 				mCurrentActiveFragment = mFragmentManager.findFragmentById(R.id.container);
@@ -96,6 +95,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 	}
 
 	public void setWindowTitle(String newTitle) {
+		Log.e("SETTING TITLE", newTitle);
 		if(mToolbar != null && newTitle != null && newTitle.length() > 0) mToolbar.setTitle(newTitle);
 	}
 
@@ -159,7 +159,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
 	@Override
 	public void onBackPressed() {
-		// mToolbar.resetScroll();
+		mToolbar.resetScroll();
 		if (mNavigationDrawerFragment.isDrawerOpen()) {
 			mNavigationDrawerFragment.closeDrawer();
 		} else {
