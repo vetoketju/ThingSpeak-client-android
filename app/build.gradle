@@ -32,11 +32,15 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.3.0'
     // compile 'com.google.code.gson:gson:2.3.1'
     // compile 'org.jdeferred:jdeferred-android:1.2.3'
+
+
+    // Bootstrap icons, buttons etc...
+    compile 'com.beardedhen:androidbootstrap:+'
 }
 
 /*
 *- my channels
-- favorites vs. watched (login api keyllä?)
+- favorites vs. watched (login api keyllï¿½?)
 - browse channels
 - map channels
 - settings
@@ -44,7 +48,7 @@ dependencies {
 jossain: open private channel with read key
 
 browse feedin item:
-  näkyvät:
+  nï¿½kyvï¿½t:
     title
     by username
     description
@@ -55,7 +59,7 @@ browse feedin item:
     ranking
     aikaleima
 
-mitä channelille voi tehdä:
+mitï¿½ channelille voi tehdï¿½:
 - watch
 - show on map
 - add widget / add shortcut
