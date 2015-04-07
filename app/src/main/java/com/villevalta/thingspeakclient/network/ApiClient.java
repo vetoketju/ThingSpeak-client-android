@@ -1,7 +1,7 @@
-package com.villevalta.thingspeakclient.api;
+package com.villevalta.thingspeakclient.network;
 
 import com.villevalta.thingspeakclient.BuildConfig;
-import com.villevalta.thingspeakclient.api.model.Channel;
+import com.villevalta.thingspeakclient.model.Channel;
 
 import java.util.List;
 

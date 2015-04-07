@@ -1,6 +1,6 @@
-package com.villevalta.thingspeakclient.ui;
+package com.villevalta.thingspeakclient.ui.adapters;
 
-import com.villevalta.thingspeakclient.api.model.Pagination;
+import com.villevalta.thingspeakclient.model.Pagination;
 import com.villevalta.thingspeakclient.model.ListViewable;
 import com.villevalta.thingspeakclient.ui.adapters.RecyclerListAdapter;
 

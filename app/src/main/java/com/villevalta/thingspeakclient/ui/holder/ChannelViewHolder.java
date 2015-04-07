@@ -4,8 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.villevalta.thingspeakclient.R;
-import com.villevalta.thingspeakclient.api.model.Channel;
-import com.villevalta.thingspeakclient.api.model.Tag;
+import com.villevalta.thingspeakclient.model.Channel;
 import com.villevalta.thingspeakclient.model.ListViewable;
 
 /**

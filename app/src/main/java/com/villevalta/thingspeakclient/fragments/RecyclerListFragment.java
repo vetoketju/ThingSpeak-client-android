@@ -1,4 +1,4 @@
-package com.villevalta.thingspeakclient.ui.fragments;
+package com.villevalta.thingspeakclient.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.villevalta.thingspeakclient.R;
-import com.villevalta.thingspeakclient.ui.ListContentProvider;
-import com.villevalta.thingspeakclient.ui.views.HideableToolbar;
+import com.villevalta.thingspeakclient.ui.adapters.ListContentProvider;
+import com.villevalta.thingspeakclient.ui.toolbar.HideableToolbar;
 import com.villevalta.thingspeakclient.ui.views.RecyclerListView;
 
 /**

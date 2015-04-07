@@ -1,14 +1,11 @@
-package com.villevalta.thingspeakclient.ui.fragments;
+package com.villevalta.thingspeakclient.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 
-import com.villevalta.thingspeakclient.api.ApiClient;
-import com.villevalta.thingspeakclient.api.PaginatedResponce;
-import com.villevalta.thingspeakclient.api.model.Channel;
-import com.villevalta.thingspeakclient.ui.ListContentProvider;
-
-import java.util.List;
+import com.villevalta.thingspeakclient.network.ApiClient;
+import com.villevalta.thingspeakclient.network.PaginatedResponce;
+import com.villevalta.thingspeakclient.model.Channel;
+import com.villevalta.thingspeakclient.ui.adapters.ListContentProvider;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;

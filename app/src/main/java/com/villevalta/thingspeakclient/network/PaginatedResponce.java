@@ -1,7 +1,7 @@
-package com.villevalta.thingspeakclient.api;
+package com.villevalta.thingspeakclient.network;
 
 import com.google.gson.annotations.SerializedName;
-import com.villevalta.thingspeakclient.api.model.Pagination;
+import com.villevalta.thingspeakclient.model.Pagination;
 
 import java.util.List;
 

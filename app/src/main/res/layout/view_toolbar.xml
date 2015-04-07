@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.villevalta.thingspeakclient.ui.views.HideableToolbar
+<com.villevalta.thingspeakclient.ui.toolbar.HideableToolbar
     android:id="@+id/toolbar"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,4 +10,4 @@
     android:orientation="vertical"
     app:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
-</com.villevalta.thingspeakclient.ui.views.HideableToolbar>
+</com.villevalta.thingspeakclient.ui.toolbar.HideableToolbar>

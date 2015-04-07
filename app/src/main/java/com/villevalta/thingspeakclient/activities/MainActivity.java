@@ -1,4 +1,4 @@
-package com.villevalta.thingspeakclient.ui.activities;
+package com.villevalta.thingspeakclient.activities;
 
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -8,14 +8,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.widget.Toolbar;
 
 import com.villevalta.thingspeakclient.R;
-import com.villevalta.thingspeakclient.ui.fragments.PublicChannelsFragment;
-import com.villevalta.thingspeakclient.ui.fragments.RecyclerListFragment;
+import com.villevalta.thingspeakclient.fragments.PublicChannelsFragment;
+import com.villevalta.thingspeakclient.fragments.RecyclerListFragment;
 import com.villevalta.thingspeakclient.ui.navigation.DrawerNavItem;
 import com.villevalta.thingspeakclient.ui.navigation.NavigationDrawerFragment;
-import com.villevalta.thingspeakclient.ui.views.HideableToolbar;
+import com.villevalta.thingspeakclient.ui.toolbar.HideableToolbar;
 
 
 public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks, FragmentManager.OnBackStackChangedListener {
@@ -57,7 +56,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 			mTitle = getTitle();
 		}else{
 			mCurrentActiveFragment = mFragmentManager.findFragmentById(R.id.container);
-			// TODO: add listener for toolbar to hide when scrolling
 			if(savedInstanceState.containsKey("title")) mTitle = savedInstanceState.getString("title");
 		}
 	}

@@ -1,4 +1,4 @@
-package com.villevalta.thingspeakclient.ui.views;
+package com.villevalta.thingspeakclient.ui.toolbar;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +9,7 @@ import android.view.animation.DecelerateInterpolator;
 
 
 import com.villevalta.thingspeakclient.R;
+import com.villevalta.thingspeakclient.ui.views.RecyclerListView;
 
 /**
  * Created by villevalta on 31.3.2015.

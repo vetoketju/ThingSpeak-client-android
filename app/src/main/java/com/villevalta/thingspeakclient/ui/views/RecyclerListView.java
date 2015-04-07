@@ -1,13 +1,11 @@
 package com.villevalta.thingspeakclient.ui.views;
 
 import android.content.Context;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
 
-import com.villevalta.thingspeakclient.ui.ListContentProvider;
+import com.villevalta.thingspeakclient.ui.adapters.ListContentProvider;
 import com.villevalta.thingspeakclient.ui.adapters.RecyclerListAdapter;
 
 import java.util.ArrayList;

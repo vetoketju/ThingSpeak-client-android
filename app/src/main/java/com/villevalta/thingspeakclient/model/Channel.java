@@ -1,8 +1,7 @@
-package com.villevalta.thingspeakclient.api.model;
+package com.villevalta.thingspeakclient.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.villevalta.thingspeakclient.R;
-import com.villevalta.thingspeakclient.model.ListViewable;
 
 import java.util.ArrayList;
 import java.util.Date;

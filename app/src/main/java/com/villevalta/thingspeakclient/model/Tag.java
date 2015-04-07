@@ -1,4 +1,4 @@
-package com.villevalta.thingspeakclient.api.model;
+package com.villevalta.thingspeakclient.model;
 
 /**
  * Created by villevalta on 24.3.2015.

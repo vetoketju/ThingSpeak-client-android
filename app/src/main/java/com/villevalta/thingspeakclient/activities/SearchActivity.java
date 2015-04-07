@@ -1,4 +1,4 @@
-package com.villevalta.thingspeakclient.ui.activities;
+package com.villevalta.thingspeakclient.activities;
 
 import android.support.v7.app.ActionBarActivity;
 
