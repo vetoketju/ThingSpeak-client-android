@@ -8,4 +8,12 @@
     <dimen name="navigation_drawer_width">240dp</dimen>
     <dimen name="action_bar_auto_hide_min_y">72dp</dimen>
     <dimen name="action_bar_auto_hide_sensivity">28dp</dimen>
+
+    <!-- font sizes -->
+    <dimen name="font_larger">22sp</dimen>
+    <dimen name="font_large">18sp</dimen>
+    <dimen name="font_normal">15sp</dimen>
+    <dimen name="font_small">12sp</dimen>
+    <dimen name="font_smaller">10sp</dimen>
+
 </resources>
