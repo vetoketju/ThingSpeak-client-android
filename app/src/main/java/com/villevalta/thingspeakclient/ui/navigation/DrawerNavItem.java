@@ -4,12 +4,12 @@ import android.support.v4.app.Fragment;
 
 public class DrawerNavItem {
 	private String title;
-	private int icon;
+	private String fa_icon;
 	private Class<? extends Fragment> fragmentClass;
 
-	public DrawerNavItem(String title, int icon, Class<? extends Fragment> fragmentClass){
+	public DrawerNavItem(String title, String fa_icon, Class<? extends Fragment> fragmentClass){
 		this.title = title;
-		this.icon = icon;
+		this.fa_icon = fa_icon;
 		this.fragmentClass = fragmentClass;
 	}
 
@@ -21,12 +21,12 @@ public class DrawerNavItem {
 		this.title = title;
 	}
 
-	public int getIcon() {
-		return icon;
+	public String getIcon() {
+		return fa_icon;
 	}
 
-	public void setIcon(int icon) {
-		this.icon = icon;
+	public void setIcon(String fa_icon) {
+		this.fa_icon = fa_icon;
 	}
 
 	public Class<? extends Fragment> getFragmentClass() {

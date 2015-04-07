@@ -45,8 +45,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
 		mNavigationDrawerFragment = (NavigationDrawerFragment) mFragmentManager.findFragmentById(R.id.navigation_drawer);
 
-		mNavigationDrawerFragment.addNavItem(new DrawerNavItem("Public Channels",R.drawable.tags_555555_64,PublicChannelsFragment.class));
-		mNavigationDrawerFragment.addNavItem(new DrawerNavItem("Channels two Test",R.drawable.tags_555555_64,PublicChannelsFragment.class));
+		mNavigationDrawerFragment.addNavItem(new DrawerNavItem("Public Channels","fa-globe",PublicChannelsFragment.class));
+		mNavigationDrawerFragment.addNavItem(new DrawerNavItem("Channels two Test",null,PublicChannelsFragment.class));
 
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);

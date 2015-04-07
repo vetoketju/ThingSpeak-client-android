@@ -7,6 +7,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.beardedhen.androidbootstrap.FontAwesomeText;
 import com.villevalta.thingspeakclient.R;
 
 import java.util.ArrayList;
@@ -49,7 +50,10 @@ public class NavigationDrawerListAdapter extends BaseAdapter {
 
 		DrawerNavItem current = drawerNavItems.get(position);
 
-		((ImageView) convertView.findViewById(R.id.icon)).setImageResource(current.getIcon());
+		if(current.getIcon() != null && current.getIcon() != ""){
+			((FontAwesomeText) convertView.findViewById(R.id.icon)).setIcon(current.getIcon());
+		}
+
 		((TextView) convertView.findViewById(R.id.title)).setText(current.getTitle());
 
 		return convertView;
