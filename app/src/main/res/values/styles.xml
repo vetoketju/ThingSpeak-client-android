@@ -1,18 +1,95 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowContentOverlay">@null</item>
+
+        <!-- COLORS -->
         <item name="colorPrimary">@color/main_blue</item>
         <item name="colorPrimaryDark">@color/main_blue_dark</item>
         <item name="colorAccent">@color/main_green</item>
-        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:textColorPrimary">@color/text_dark</item>
+        <item name="android:textColorSecondary">@color/text_dark2</item>
+        <item name="android:textColorTertiary">@color/text_dark3</item>
         <!--
-        <item name="colorControlNormal"></item>
-        <item name="colorControlActivated"></item>
-        <item name="colorControlHighlight"></item>
-        <item name="colorButtonNormal"></item>
-        <item name="colorSwitchThumbNormal"></item> OFF STATE
+        <item name="textColorPrimaryInverse">@color/main_green</item>
+        <item name="textColorSecondaryInverse">@color/main_green</item>
+        <item name="textColorTertiaryInverse">@color/main_green</item>
+        <item name="textColorHintInverse">@color/main_green</item>
+        -->
+        <!--
+        <item name="textColorPrimaryDisableOnly">@color/main_green</item>
+        <item name="textColorPrimaryInverseDisableOnly">@color/main_green</item>
+        <item name="textColorPrimaryNoDisable">@color/main_green</item>
+        <item name="textColorSecondaryNoDisable">@color/main_green</item>
+        <item name="textColorPrimaryInverseNoDisable">@color/main_green</item>
+        <item name="textColorSecondaryInverseNoDisable">@color/main_green</item>
+        <item name="textColorPrimaryActivated">@color/main_green</item>
+        <item name="textColorSecondaryActivated">@color/main_green</item>
+        <item name="textColorSearchUrl">@color/main_green</item>
+        <item name="textColorHighlightInverse">@color/main_green</item>
+        <item name="textColorLinkInverse">@color/main_green</item>
+        <item name="textColorAlertDialogListItem">@color/main_green</item>
+        <item name="searchWidgetCorpusItemBackground">@color/main_green</item>
         -->
     </style>
+
+<!--
+    <style name="Text_Display_4">
+        <item name="android:textSize">@dimen/font_display4</item>
+        <item name="android:fontFamily">@string/font.Light</item>
+    </style>
+
+    <style name="Text_Display_3">
+        <item name="android:textSize">@dimen/font_display3</item>
+        <item name="android:fontFamily">@string/font.Regular</item>
+    </style>
+
+    <style name="Text_Display_2">
+        <item name="android:textSize">@dimen/font_display2</item>
+        <item name="android:fontFamily">@string/font.Regular</item>
+    </style>
+
+    <style name="Text_Display_1">
+        <item name="android:textSize">@dimen/font_display1</item>
+        <item name="android:fontFamily">@string/font.Regular</item>
+    </style>
+
+    <style name="Text_Headline">
+        <item name="android:textSize">@dimen/font_headline</item>
+        <item name="android:fontFamily">@string/font.Regular</item>
+    </style>
+
+    <style name="Text_Title">
+        <item name="android:textSize">@dimen/font_title</item>
+        <item name="android:fontFamily">@string/font.Medium</item>
+    </style>
+
+    <style name="Text_Subhead">
+        <item name="android:textSize">@dimen/font_subhead</item>
+        <item name="android:fontFamily">@string/font.Regular</item>
+    </style>
+
+    <style name="Text_Body_2">
+        <item name="android:textSize">@dimen/font_body</item>
+        <item name="android:fontFamily">@string/font.Medium</item>
+    </style>
+
+    <style name="Text_Body_1">
+        <item name="android:textSize">@dimen/font_body</item>
+        <item name="android:fontFamily">@string/font.Regular</item>
+    </style>
+
+    <style name="Text_Caption">
+        <item name="android:textSize">@dimen/font_caption</item>
+        <item name="android:fontFamily">@string/font.Regular</item>
+    </style>
+
+    <style name="Text_Button">
+        <item name="android:textSize">@dimen/font_body</item>
+        <item name="android:fontFamily">@string/font.Medium</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+-->
 
 </resources>

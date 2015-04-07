@@ -11,4 +11,16 @@
     <string name="action_example">Example action</string>
 
     <string name="action_settings">Settings</string>
+
+<!--
+    <string name="font.Thin">"sans-serif-thin"</string>
+    <string name="font.Light">"sans-serif-light"</string>
+    <string name="font.Regular">"sans-serif-regular"</string>
+    <string name="font.Medium">"sans-serif-medium"</string>
+    <string name="font.Bold">"sans-serif-bold"</string>
+    <string name="font.Black">"sans-serif-black"</string>
+-->
+
+
+
 </resources>

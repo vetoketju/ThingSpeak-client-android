@@ -11,7 +11,7 @@
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/font_large"
+        android:textSize="@dimen/font_body"
         />
 
     <TextView
@@ -22,6 +22,7 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:textColor="#000"
+        style="@style/TextAppearance.AppCompat.Body2"
         />
 
 </LinearLayout>

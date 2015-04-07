@@ -7,6 +7,11 @@
     <color name="main_red">#c71c22</color>
 
     <color name="text_dark">#555</color>
+    <color name="text_dark2">#777</color>
+    <color name="text_dark3">#999</color>
+
+
+
     <color name="text_blue">#317eac</color>
 
     <color name="background_white">#fff</color>
