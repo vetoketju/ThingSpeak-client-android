@@ -20,3 +20,6 @@ https://github.com/futurice/android-best-practices
 
 Font Awesome png icon generator:
 http://fa2png.io/
+
+Google Material design guidelines:
+http://www.google.com/design/spec/material-design/introduction.html
