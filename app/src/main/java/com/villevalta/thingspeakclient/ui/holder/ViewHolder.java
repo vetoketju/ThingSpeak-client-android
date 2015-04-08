@@ -23,7 +23,7 @@ public abstract class ViewHolder extends RecyclerView.ViewHolder {
 	public static ViewHolder fromViewType(int viewType, View v) {
 		switch (viewType){
 			case R.layout.listitem_channel: return new ChannelViewHolder(v);
-			default: return null;
+			default: throw new AssertionError("Invalid viewType, Did you remember to add the viewType in ViewHolder class?");
 		}
 	}
 }

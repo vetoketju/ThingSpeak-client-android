@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.villevalta.thingspeakclient.R;
+import com.villevalta.thingspeakclient.model.ListStatusObject;
 import com.villevalta.thingspeakclient.ui.adapters.ListContentProvider;
 import com.villevalta.thingspeakclient.ui.toolbar.HideableToolbar;
 import com.villevalta.thingspeakclient.ui.views.RecyclerListView;
@@ -88,6 +89,10 @@ public abstract class RecyclerListFragment extends Fragment implements SwipeRefr
 	@Override
 	public int getScrollThreshold() {
 		return mScrollThreshold;
+	}
+
+	public void setStatus(ListStatusObject status){
+		if(mRecyclerView != null) mRecyclerView.setStatus(status);
 	}
 
 	public void hideRefreshing() {

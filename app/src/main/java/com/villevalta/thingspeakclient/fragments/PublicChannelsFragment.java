@@ -1,7 +1,11 @@
 package com.villevalta.thingspeakclient.fragments;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import com.villevalta.thingspeakclient.model.ListStatusObject;
 import com.villevalta.thingspeakclient.network.ApiClient;
 import com.villevalta.thingspeakclient.network.PaginatedResponce;
 import com.villevalta.thingspeakclient.model.Channel;
@@ -26,15 +30,23 @@ public class PublicChannelsFragment extends RecyclerListFragment{
 		super.setLoadMoreOnScroll(7);
 	}
 
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View v = super.onCreateView(inflater, container, savedInstanceState);
+		if(isLoading) setStatus(new ListStatusObject(true,"Loading..."));
+		return v;
+	}
 
 	private void loadMore(int page){
 
 		if(isLoading) return;
 		isLoading = true;
 
+
 		ApiClient.getInstance().getPublicChannels(page, new Callback<PaginatedResponce<Channel>>() {
 			@Override
 			public void success(PaginatedResponce<Channel> channels, Response response) {
+				//"Android: Callbacks are executed on the application's main (UI) thread."
 				mListContentProvider.setPagination(channels.getPagination());
 				mListContentProvider.addAll(channels.getObjects());
 				onDone();
@@ -51,6 +63,11 @@ public class PublicChannelsFragment extends RecyclerListFragment{
 	private void onDone(){
 		isLoading = false;
 		super.hideRefreshing();
+		if(mListContentProvider.getPagination().isLastPage()){
+			setStatus(new ListStatusObject(false,"~ end ~"));
+		}else{
+			setStatus(new ListStatusObject(false,null));
+		}
 	}
 
 	@Override
@@ -61,6 +78,10 @@ public class PublicChannelsFragment extends RecyclerListFragment{
 
 	@Override
 	public void onThresholdOverScrolled() {
-		loadMore(mListContentProvider.getPagination().getCurrent_page() + 1);
+		if(!mListContentProvider.getPagination().isLastPage()){
+			int nextPage = mListContentProvider.getPagination().getCurrent_page() + 1;
+			setStatus(new ListStatusObject(true,"Loading page "+nextPage+"..."));
+			loadMore(nextPage);
+		}
 	}
 }

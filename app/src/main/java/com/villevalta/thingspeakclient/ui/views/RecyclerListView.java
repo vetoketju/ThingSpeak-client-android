@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 
+import com.villevalta.thingspeakclient.model.ListStatusObject;
 import com.villevalta.thingspeakclient.ui.adapters.ListContentProvider;
 import com.villevalta.thingspeakclient.ui.adapters.RecyclerListAdapter;
 
@@ -38,9 +39,11 @@ public class RecyclerListView extends RecyclerView {
 	}
 
 	private void init() {
+
 		LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext());
 		mLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 		this.setLayoutManager(mLinearLayoutManager);
+
 		this.setOnScrollListener(new OnScrollListener() {
 			@Override
 			public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -82,6 +85,9 @@ public class RecyclerListView extends RecyclerView {
 		}
 	}
 
+	public void setStatus(ListStatusObject status){
+		if(mListAdapter != null) mListAdapter.setStatus(status);
+	}
 
 
 

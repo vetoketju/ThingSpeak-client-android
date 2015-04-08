@@ -22,28 +22,44 @@ public class ListContentProvider extends ArrayList<ListViewable> {
 
 	@Override
 	public boolean add(final ListViewable object){
+		boolean first = super.size() == 0;
 		super.add(object);
-		if(mRecyclerListAdapter != null) mRecyclerListAdapter.notifyItemInserted(size() - 1);
+		if(mRecyclerListAdapter != null){
+			if(first) mRecyclerListAdapter.notifyDataSetChanged();
+			else mRecyclerListAdapter.notifyItemInserted(size() - 1);
+		}
 		return true; // return always true
 	}
 
 	@Override
 	public void add(int index, final ListViewable object){
+		boolean first = super.size() == 0;
 		super.add(index,object);
-		if(mRecyclerListAdapter != null) mRecyclerListAdapter.notifyItemInserted(index);
+		if(mRecyclerListAdapter != null){
+			if(first) mRecyclerListAdapter.notifyDataSetChanged();
+			else mRecyclerListAdapter.notifyItemInserted(index);
+		}
 	}
 
 	@Override
 	public boolean addAll(final Collection<? extends ListViewable> collection) {
+		boolean first = super.size() == 0;
 		boolean result = super.addAll(collection);
-		if(result && mRecyclerListAdapter != null) mRecyclerListAdapter.notifyItemRangeInserted(size() - collection.size(), collection.size());
+		if(result && mRecyclerListAdapter != null){
+			if(first) mRecyclerListAdapter.notifyDataSetChanged();
+			else mRecyclerListAdapter.notifyItemRangeInserted(size() - collection.size(), collection.size());
+		}
 		return result;
 	}
 
 	@Override
 	public boolean addAll(int index, final Collection<? extends ListViewable> collection) {
+		boolean first = super.size() == 0;
 		boolean result = super.addAll(collection);
-		if(result && mRecyclerListAdapter != null) mRecyclerListAdapter.notifyItemRangeInserted(index, collection.size());
+		if(result && mRecyclerListAdapter != null){
+			if(first) mRecyclerListAdapter.notifyDataSetChanged();
+			else mRecyclerListAdapter.notifyItemRangeInserted(index, collection.size());
+		}
 		return result;
 	}
 
