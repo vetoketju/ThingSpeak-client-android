@@ -23,3 +23,6 @@ http://fa2png.io/
 
 Google Material design guidelines:
 http://www.google.com/design/spec/material-design/introduction.html
+
+MPAndroidChart wiki:
+https://github.com/PhilJay/MPAndroidChart/wiki
