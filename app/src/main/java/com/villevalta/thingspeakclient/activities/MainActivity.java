@@ -1,5 +1,6 @@
 package com.villevalta.thingspeakclient.activities;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.FragmentManager;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.Toast;
 
 import com.villevalta.thingspeakclient.R;
 import com.villevalta.thingspeakclient.fragments.PublicChannelsFragment;
@@ -128,13 +130,21 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 
-		//noinspection SimplifiableIfStatement
-		if (id == R.id.action_settings) {
+		if (id == R.id.action_search){
+			Intent i = new Intent(this,SearchActivity.class);
+			startActivity(i);
+			return true;
+		}
+		else if (id == R.id.action_openchannel) {
+			Toast.makeText(this, "Open channel pressed.", Toast.LENGTH_SHORT).show();
+			// TODO: Add input dialog here that has "channel id", "Read Key"...
+			return true;
+		}
+		else if (id == R.id.action_settings) {
+			Intent i = new Intent(this,SettingsActivity.class);
+			startActivity(i);
 			return true;
 		}
 
