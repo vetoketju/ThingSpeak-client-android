@@ -31,37 +31,11 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.3.0'
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.3.0'
     // compile 'com.google.code.gson:gson:2.3.1'
-    // compile 'org.jdeferred:jdeferred-android:1.2.3'
 
 
     // Bootstrap icons, buttons etc...
     compile 'com.beardedhen:androidbootstrap:+'
+
+    // Charts
+    compile 'com.github.PhilJay:MPAndroidChart:v2.0.9'
 }
-
-/*
-*- my channels
-- favorites vs. watched (login api keyll�?)
-- browse channels
-- map channels
-- settings
-
-jossain: open private channel with read key
-
-browse feedin item:
-  n�kyv�t:
-    title
-    by username
-    description
-    tagit
-    view on map - ikoni
-  piilossa:
-    id
-    ranking
-    aikaleima
-
-mit� channelille voi tehd�:
-- watch
-- show on map
-- add widget / add shortcut
-- comment/comments
-* */
