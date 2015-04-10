@@ -16,6 +16,8 @@ public class ChannelActivity extends ActionBarActivity{
 	int mChannelId; // Channel id
 	String mChannelReadKey;
 
+	// Channel info
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,11 @@ public class ChannelActivity extends ActionBarActivity{
 		if(!readParameters()) finish(); // Close if id was not given
 
 		setContentView(R.layout.activity_channel);
+
+		// Find views
+
+
+
 	}
 
 

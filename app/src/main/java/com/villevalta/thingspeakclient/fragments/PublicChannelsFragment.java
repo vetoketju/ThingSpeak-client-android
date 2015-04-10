@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import com.villevalta.thingspeakclient.model.ListStatusObject;
 import com.villevalta.thingspeakclient.network.ApiClient;
-import com.villevalta.thingspeakclient.network.PaginatedResponce;
+import com.villevalta.thingspeakclient.network.PaginatedChannelResponce;
 import com.villevalta.thingspeakclient.model.Channel;
 import com.villevalta.thingspeakclient.ui.adapters.ListContentProvider;
 
@@ -43,9 +43,9 @@ public class PublicChannelsFragment extends RecyclerListFragment{
 		isLoading = true;
 
 
-		ApiClient.getInstance().getPublicChannels(page, new Callback<PaginatedResponce<Channel>>() {
+		ApiClient.getInstance().getPublicChannels(page, new Callback<PaginatedChannelResponce>() {
 			@Override
-			public void success(PaginatedResponce<Channel> channels, Response response) {
+			public void success(PaginatedChannelResponce channels, Response response) {
 				//"Android: Callbacks are executed on the application's main (UI) thread."
 				mListContentProvider.setPagination(channels.getPagination());
 				mListContentProvider.addAll(channels.getObjects());

@@ -1,6 +1,7 @@
 package com.villevalta.thingspeakclient.network;
 
 import com.google.gson.annotations.SerializedName;
+import com.villevalta.thingspeakclient.model.Channel;
 import com.villevalta.thingspeakclient.model.Pagination;
 
 import java.util.List;
@@ -8,13 +9,13 @@ import java.util.List;
 /**
  * Created by villevalta on 30.3.2015.
  */
-public class PaginatedResponce <T> {
+public class PaginatedChannelResponce{
 
 	@SerializedName("pagination")
 	Pagination pagination;
 
 	@SerializedName("channels")
-	List<T> objects;
+	List<Channel> objects;
 
 	public Pagination getPagination() {
 		return pagination;
@@ -24,11 +25,11 @@ public class PaginatedResponce <T> {
 		this.pagination = pagination;
 	}
 
-	public List<T> getObjects() {
+	public List<Channel> getObjects() {
 		return objects;
 	}
 
-	public void setObjects(List<T> objects) {
+	public void setObjects(List<Channel> objects) {
 		this.objects = objects;
 	}
 }

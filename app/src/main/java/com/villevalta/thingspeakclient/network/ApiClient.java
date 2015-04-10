@@ -4,6 +4,7 @@ import com.villevalta.thingspeakclient.BuildConfig;
 import com.villevalta.thingspeakclient.model.Channel;
 
 import java.util.List;
+import java.util.Map;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -17,6 +18,7 @@ public class ApiClient {
 	// singleton instance of this client
 	private static ThingSpeakApiInterface clientInstance;
 
+	private static final String DEFAULT_APILOCATION = "https://api.thingspeak.com";
 	private static final String ENDPOINT_CHANNELS = "channels";
 	private static final String ENDPOINT_USERS = "users";
 	private static final String ENDPOINT_FEEDS = "feeds";
@@ -26,7 +28,7 @@ public class ApiClient {
 	public static ThingSpeakApiInterface getInstance() {
 		if (clientInstance == null) {
 			RestAdapter restAdapter = new RestAdapter.Builder()
-					.setEndpoint("https://api.thingspeak.com")
+					.setEndpoint(DEFAULT_APILOCATION)
 					.setLogLevel(BuildConfig.DEBUG ? RestAdapter.LogLevel.BASIC : RestAdapter.LogLevel.NONE)
 					//.setConverter()
 					.build();
@@ -50,20 +52,33 @@ public class ApiClient {
 			distance (decimal) - Distance in kilometers from location. (optional)
 		*/
 
-		@GET("/" + ENDPOINT_CHANNELS + "/" + "public" + MARKUP)
-		void getPublicChannels(@Query("page") int page, Callback<PaginatedResponce<Channel>> callback);
+		// Channels
 
 		@GET("/" + ENDPOINT_CHANNELS + "/" + "public" + MARKUP)
-		void getPublicChannelsByUsername(@Query("page") int page, @Query("username") String username, Callback<List<Channel>> callback);
+		void getPublicChannels(@Query("page") int page, Callback<PaginatedChannelResponce> callback);
 
 		@GET("/" + ENDPOINT_CHANNELS + "/" + "public" + MARKUP)
-		void getPublicChannelsByTag(@Query("page") int page, @Query("tag") String tag, Callback<List<Channel>> callback);
+		void getPublicChannelsByUsername(@Query("page") int page, @Query("username") String username, Callback<PaginatedChannelResponce> callback);
+
+		@GET("/" + ENDPOINT_CHANNELS + "/" + "public" + MARKUP)
+		void getPublicChannelsByTag(@Query("page") int page, @Query("tag") String tag, Callback<PaginatedChannelResponce> callback);
 
 		@GET("/" + ENDPOINT_CHANNELS + "/" + "{id}" + MARKUP)
 		void getPublicChannel(@Path("id") int id, Callback<Channel> callback);
 
 		@GET("/" + ENDPOINT_CHANNELS + "/" + "{id}" + MARKUP)
 		void getPrivateChannel(@Path("id") int id, Callback<Channel> callback);
+
+		// Channel Feeds
+
+		@GET("/" + ENDPOINT_CHANNELS + "/" +"{id}" +"/" + ENDPOINT_FEEDS + MARKUP)
+		void getPublicChannelFeed(@Path("id") int id, @QueryMap Map<String, String> parameters, Callback<Channel> callback);
+
+		@GET("/" + ENDPOINT_CHANNELS + "/" +"{id}" +"/" + ENDPOINT_FEEDS + MARKUP)
+		void getPrivateChannelFeed(@Path("id") int id, @QueryMap Map<String, String> parameters, Callback<Channel> callback);
+
+		// User
+
 
 	}
 }
