@@ -2,6 +2,7 @@ package com.villevalta.thingspeakclient.network;
 
 import com.villevalta.thingspeakclient.BuildConfig;
 import com.villevalta.thingspeakclient.model.Channel;
+import com.villevalta.thingspeakclient.model.ChannelFeed;
 
 import java.util.List;
 import java.util.Map;
@@ -72,10 +73,7 @@ public class ApiClient {
 		// Channel Feeds
 
 		@GET("/" + ENDPOINT_CHANNELS + "/" +"{id}" +"/" + ENDPOINT_FEEDS + MARKUP)
-		void getPublicChannelFeed(@Path("id") int id, @QueryMap Map<String, String> parameters, Callback<Channel> callback);
-
-		@GET("/" + ENDPOINT_CHANNELS + "/" +"{id}" +"/" + ENDPOINT_FEEDS + MARKUP)
-		void getPrivateChannelFeed(@Path("id") int id, @QueryMap Map<String, String> parameters, Callback<Channel> callback);
+		void getChannelFeed(@Path("id") int id, @Header("api_key") String apiKey, @QueryMap Map<String, String> parameters, Callback<ChannelFeed> callback);
 
 		// User
 

@@ -1,16 +1,20 @@
 package com.villevalta.thingspeakclient.ui.holder;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import com.villevalta.thingspeakclient.R;
+import com.villevalta.thingspeakclient.activities.ChannelActivity;
 import com.villevalta.thingspeakclient.model.Channel;
 import com.villevalta.thingspeakclient.model.ListViewable;
 
 /**
  * Created by villevalta on 25.3.2015.
  */
-public class ChannelViewHolder extends ViewHolder {
+public class ChannelViewHolder extends ViewHolder implements View.OnClickListener {
 
 	private Channel mChannel;
 
@@ -45,7 +49,22 @@ public class ChannelViewHolder extends ViewHolder {
 		}
 
 		mTags.setText(tags);
+
+		// Set click handlers
+		root.setOnClickListener(this);
+		mUsername.setOnClickListener(this);
+
 	}
 
 
+	@Override
+	public void onClick(View v) {
+		if(v.getId() == mUsername.getId()){
+			// TODO: open user activity
+		}else{
+			Intent intent = new Intent(root.getContext(), ChannelActivity.class);
+			intent.putExtra("id", mChannel.getId());
+			root.getContext().startActivity(intent);
+		}
+	}
 }
