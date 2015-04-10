@@ -2,7 +2,7 @@ ThingSpeak-client-android
 =========
 [Thingspeak](https://thingspeak.com/) client for android. Status: in development
 
-# Planned features
+## Planned features
 * List public channels
 * Favorite channels
 * View a channel and its feeds
@@ -25,8 +25,7 @@ Font Awesome png icon generator: http://fa2png.io/
 Google Material design guidelines: http://www.google.com/design/spec/material-design/introduction.html
 MPAndroidChart wiki: https://github.com/PhilJay/MPAndroidChart/wiki
 
-License
-=========
+## License
         The MIT License (MIT)
         
         Copyright (c) 2015 Ville Valta
@@ -49,8 +48,7 @@ License
         OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
         SOFTWARE.
         
-Third-party Libraries
-=========
+## Third-party Libraries
 
 The following dependencies are bundled with software, but are under terms of a separate license:
 * [Retrofit](http://square.github.io/retrofit/) - Apache Licence 2.0
