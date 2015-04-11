@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Created by villevalta on 10.4.2015.
  */
-public class Entry {
+public class Feed {
 
 	Date created_at;
 	int entry_id;

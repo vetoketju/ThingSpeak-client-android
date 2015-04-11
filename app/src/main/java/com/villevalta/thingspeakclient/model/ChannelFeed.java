@@ -13,7 +13,7 @@ public class ChannelFeed {
 	Channel channel;
 
 	@SerializedName("feeds")
-	ArrayList<Entry> entries;
+	ArrayList<Feed> entries;
 
 	public Channel getChannel() {
 		return channel;
@@ -23,11 +23,11 @@ public class ChannelFeed {
 		this.channel = channel;
 	}
 
-	public ArrayList<Entry> getEntries() {
+	public ArrayList<Feed> getEntries() {
 		return entries;
 	}
 
-	public void setEntries(ArrayList<Entry> entries) {
+	public void setEntries(ArrayList<Feed> entries) {
 		this.entries = entries;
 	}
 }
