@@ -15,4 +15,19 @@ public class ChannelFeed {
 	@SerializedName("feeds")
 	ArrayList<Entry> entries;
 
+	public Channel getChannel() {
+		return channel;
+	}
+
+	public void setChannel(Channel channel) {
+		this.channel = channel;
+	}
+
+	public ArrayList<Entry> getEntries() {
+		return entries;
+	}
+
+	public void setEntries(ArrayList<Entry> entries) {
+		this.entries = entries;
+	}
 }
