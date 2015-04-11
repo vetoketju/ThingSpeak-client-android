@@ -9,6 +9,14 @@
     <dimen name="action_bar_auto_hide_min_y">72dp</dimen>
     <dimen name="action_bar_auto_hide_sensivity">28dp</dimen>
 
+
+    <!-- Paddings -->
+    <dimen name="padding_large">16dp</dimen>
+    <dimen name="padding_medium">12dp</dimen>
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_micro">4dp</dimen>
+
+
     <!-- LAYOUT: http://www.google.com/design/spec/layout/metrics-keylines.html -->
 
 
