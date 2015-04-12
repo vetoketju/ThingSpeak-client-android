@@ -41,6 +41,17 @@ public class ChartView extends LinearLayout implements Toolbar.OnMenuItemClickLi
 
         mToolbar.inflateMenu(R.menu.chart);
         mToolbar.setOnMenuItemClickListener(this);
+
+        mLineChart.getLegend().setEnabled(false);
+
+        mLineChart.getXAxis().setDrawLabels(false);
+        mLineChart.getAxisLeft().setDrawLabels(true);
+        mLineChart.getAxisRight().setDrawLabels(false);
+        mLineChart.setDescription("");
+        mLineChart.setPinchZoom(false);
+        mLineChart.setDoubleTapToZoomEnabled(false);
+
+
     }
 
     public void setTitle(String title){
@@ -55,6 +66,10 @@ public class ChartView extends LinearLayout implements Toolbar.OnMenuItemClickLi
 
     public void setData(LineData data) {
         mLineChart.setData(data);
-        mLineChart.invalidate();
+        data.getDataSetByIndex(0).setDrawCircles(false);
+        data.getDataSetByIndex(0).setColor(getResources().getColor(R.color.main_blue_dark));
+
+        mLineChart.animateX(1000);
+        //mLineChart.invalidate();
     }
 }

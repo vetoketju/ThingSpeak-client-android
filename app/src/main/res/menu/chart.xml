@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-<item android:id="@+id/action_chart_preferences"
-    android:icon="@android:drawable/ic_menu_manage"
-    app:showAsAction="never"
-    android:title="Preferences" />
-    <item android:id="@+id/action_chart_favorite"
-        android:icon="@android:drawable/ic_menu_add"
+    <item
+        android:id="@+id/action_chart_preferences"
         app:showAsAction="never"
-        android:title="Favorite" />
+        android:title="Preferences" />
+    <item
+    android:id="@+id/action_chart_favorite"
+    app:showAsAction="never"
+    android:title="Favorite" />
+    <item
+        android:id="@+id/action_chart_fullscreen"
+        app:showAsAction="never"
+        android:title="Fullscreen" />
+    <item
+        android:id="@+id/action_chart_widget"
+        app:showAsAction="never"
+        android:title="Add widget..." />
 </menu>

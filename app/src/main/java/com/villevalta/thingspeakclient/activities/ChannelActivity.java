@@ -43,6 +43,8 @@ public class ChannelActivity extends ActionBarActivity {
             finish(); // Close if id was not given
         }
 
+        // Toolbar menu: auto refresh, favorite, add launcher shortcut
+
         setContentView(R.layout.activity_channel);
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
