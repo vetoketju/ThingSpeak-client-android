@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:fitsSystemWindows="true"
-              android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
-    <include layout="@layout/view_toolbar"/>
+    <include layout="@layout/view_toolbar" />
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -31,7 +31,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="12dp"
-                    android:text="Description"/>
+                    android:text="Description" />
 
                 <TextView
                     android:id="@+id/username"
@@ -41,15 +41,14 @@
                     android:paddingBottom="12dp"
                     android:paddingLeft="12dp"
                     android:paddingRight="12dp"
-                    android:text="by Username"/>
+                    android:text="by Username" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="12dp"
-                    android:background="#ccc"
-                    />
+                    android:background="#ccc" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -63,8 +62,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="#000"
-                        app:fa_icon="fa-tags"
-                        />
+                        app:fa_icon="fa-tags" />
 
                     <TextView
                         android:id="@+id/tags"
@@ -72,66 +70,73 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="4dp"
-                        android:text="Tag1, Tag2, Tag3"/>
+                        android:text="Tag1, Tag2, Tag3" />
                 </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/chart1_wrapper"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:id="@+id/chartswrapper"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/padding_medium"
                 android:orientation="vertical">
 
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/chart1_toolbar"
+                <com.villevalta.thingspeakclient.ui.views.ChartView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:title="Chart one title">
+                    android:visibility="gone"
+                    android:id="@+id/chart1"
+                    android:layout_marginTop="@dimen/padding_medium"/>
 
-                </android.support.v7.widget.Toolbar>
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    app:cardCornerRadius="4dp"
-                    android:layout_marginLeft="@dimen/padding_micro"
-                    android:layout_marginRight="@dimen/padding_micro"
-                    >
-                    <com.github.mikephil.charting.charts.LineChart
-                        android:id="@+id/chart1"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp" />
-                </android.support.v7.widget.CardView>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/chart2_wrapper"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/chart2_toolbar"
+                <com.villevalta.thingspeakclient.ui.views.ChartView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:title="Chart two title">
+                    android:visibility="gone"
+                    android:id="@+id/chart2"
+                    android:layout_marginTop="@dimen/padding_medium"/>
 
-                </android.support.v7.widget.Toolbar>
-                <android.support.v7.widget.CardView
+                <com.villevalta.thingspeakclient.ui.views.ChartView
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    app:cardCornerRadius="4dp"
-                    android:layout_marginLeft="@dimen/padding_micro"
-                    android:layout_marginRight="@dimen/padding_micro"
-                    >
-                    <com.github.mikephil.charting.charts.LineChart
-                        android:id="@+id/chart2"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp" />
-                </android.support.v7.widget.CardView>
-            </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/chart3"
+                    android:layout_marginTop="@dimen/padding_medium"/>
 
+                <com.villevalta.thingspeakclient.ui.views.ChartView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/chart4"
+                    android:layout_marginTop="@dimen/padding_medium"/>
+
+                <com.villevalta.thingspeakclient.ui.views.ChartView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/chart5"
+                    android:layout_marginTop="@dimen/padding_medium"/>
+
+                <com.villevalta.thingspeakclient.ui.views.ChartView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/chart6"
+                    android:layout_marginTop="@dimen/padding_medium"/>
+
+                <com.villevalta.thingspeakclient.ui.views.ChartView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/chart7"
+                    android:layout_marginTop="@dimen/padding_medium"/>
+
+                <com.villevalta.thingspeakclient.ui.views.ChartView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/chart8"
+                    android:layout_marginTop="@dimen/padding_medium"/>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

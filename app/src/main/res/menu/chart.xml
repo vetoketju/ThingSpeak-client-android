@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<item android:id="@+id/action_chart_preferences"
+    android:icon="@android:drawable/ic_menu_manage"
+    app:showAsAction="never"
+    android:title="Preferences" />
+    <item android:id="@+id/action_chart_favorite"
+        android:icon="@android:drawable/ic_menu_add"
+        app:showAsAction="never"
+        android:title="Favorite" />
+</menu>
