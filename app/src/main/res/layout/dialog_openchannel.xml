@@ -4,26 +4,27 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
     <TextView
+        style="@style/TextAppearance.AppCompat.Body2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/TextAppearance.AppCompat.Body2"
         android:text="Channel ID"/>
     <EditText
         android:id="@+id/input_channelId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:ems="10"
-        android:inputType="number"/>
+        android:inputType="number"
+        android:singleLine="true"/>
     <TextView
+        style="@style/TextAppearance.AppCompat.Body2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/TextAppearance.AppCompat.Body2"
         android:text="Channel read key"/>
     <EditText
         android:id="@+id/input_channelReadKey"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:hint="Optional"/>
+        android:hint="Optional"
+        android:singleLine="true"/>
 </LinearLayout>

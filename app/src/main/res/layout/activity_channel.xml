@@ -9,10 +9,10 @@
     <include layout="@layout/view_toolbar" />
 
     <ScrollView
-        android:id="@+id/ChannelView"
+        android:id="@+id/channelContentView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -169,6 +169,7 @@
             android:id="@+id/input_channelId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:singleLine="true"
             android:inputType="number"/>
 
         <TextView
@@ -182,6 +183,7 @@
             android:id="@+id/input_channelReadKey"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:singleLine="true"
             android:hint="Optional"/>
 
         <com.beardedhen.androidbootstrap.BootstrapButton
@@ -196,5 +198,17 @@
             />
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/loadingView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        >
+        <ProgressBar
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:indeterminate="true"/>
+    </RelativeLayout>
 
 </LinearLayout>

@@ -31,14 +31,16 @@ public class ChannelActivity extends ActionBarActivity implements View.OnClickLi
 
     ChannelFeed mChannelFeed;
 
-    View mChannelView;
-
-    // Channel info
     Toolbar mToolbar;
+
+    // Content views
+    View mChannelContentView;
     TextView mDescriptionTextView;
     TextView mUsernameTextView;
-
     ChartView mChart1, mChart2, mChart3, mChart4, mChart5, mChart6, mChart7, mChart8;
+
+    // Loading View
+    View mLoadingView;
 
     // ErrorView
     View mErrorView;
@@ -58,7 +60,9 @@ public class ChannelActivity extends ActionBarActivity implements View.OnClickLi
 
         setContentView(R.layout.activity_channel);
 
-        mChannelView = findViewById(R.id.ChannelView);
+        mLoadingView = findViewById(R.id.loadingView);
+
+        mChannelContentView = findViewById(R.id.channelContentView);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mDescriptionTextView = (TextView) findViewById(R.id.description);
         mUsernameTextView = (TextView) findViewById(R.id.username);
@@ -91,7 +95,7 @@ public class ChannelActivity extends ActionBarActivity implements View.OnClickLi
             @Override
             public void success(ChannelFeed channelFeed, Response response) {
                 mChannelFeed = channelFeed;
-                hideError();
+                showContent();
                 updateChannelInfo();
                 updateCharts();
             }
@@ -159,16 +163,22 @@ public class ChannelActivity extends ActionBarActivity implements View.OnClickLi
         mInputChannelId.setText(""+mChannelId);
         mInputChannelReadKey.setText(mChannelReadKey != null ? mChannelReadKey : "");
         mRetryButton.setBootstrapButtonEnabled(true);
-        mChannelView.setVisibility(View.GONE);
+        mChannelContentView.setVisibility(View.GONE);
+        mLoadingView.setVisibility(View.GONE);
         mErrorView.setVisibility(View.VISIBLE);
     }
 
-    private void hideError(){
+    private void showContent(){
         mErrorView.setVisibility(View.GONE);
-        mChannelView.setVisibility(View.VISIBLE);
+        mLoadingView.setVisibility(View.GONE);
+        mChannelContentView.setVisibility(View.VISIBLE);
     }
 
-
+    private void showLoading(){
+        mErrorView.setVisibility(View.GONE);
+        mChannelContentView.setVisibility(View.GONE);
+        mLoadingView.setVisibility(View.VISIBLE);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -210,6 +220,8 @@ public class ChannelActivity extends ActionBarActivity implements View.OnClickLi
 
             mRetryButton.setBootstrapButtonEnabled(false);
             ApiClient.getInstance().getChannelFeed(mChannelId, mChannelReadKey, null, onInfoCallback());
+            showLoading();
         }
     }
+
 }
