@@ -159,7 +159,7 @@ public class ChannelActivity extends ActionBarActivity implements View.OnClickLi
     private void updateChannelInfo() {
         mToolbar.setTitle(mChannelFeed.getChannel().getName());
         mDescriptionTextView.setText(mChannelFeed.getChannel().getDescription());
-        mUsernameTextView.setText(mChannelFeed.getChannel().getUsername());
+        mUsernameTextView.setText("By " + mChannelFeed.getChannel().getUsername());
     }
 
     private void updateCharts() {
