@@ -67,10 +67,7 @@ public class ApiClient {
 		void getPublicChannelsByTag(@Query("page") int page, @Query("tag") String tag, Callback<PaginatedChannelResponce> callback);
 
 		@GET("/" + ENDPOINT_CHANNELS + "/" + "{id}" + MARKUP)
-		void getPublicChannel(@Path("id") int id, Callback<Channel> callback);
-
-		@GET("/" + ENDPOINT_CHANNELS + "/" + "{id}" + MARKUP)
-		void getPrivateChannel(@Path("id") int id, Callback<Channel> callback);
+		void getChannel(@Path("id") int id, @Query("api_key") String apiKey, Callback<Channel> callback);
 
 		// Channel Feeds
 

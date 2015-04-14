@@ -7,12 +7,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.github.mikephil.charting.data.LineData;
 import com.villevalta.thingspeakclient.R;
+import com.villevalta.thingspeakclient.model.Channel;
 import com.villevalta.thingspeakclient.model.ChannelFeed;
 import com.villevalta.thingspeakclient.network.ApiClient;
 import com.villevalta.thingspeakclient.ui.views.ChartView;
@@ -37,7 +39,13 @@ public class ChannelActivity extends ActionBarActivity implements View.OnClickLi
     View mChannelContentView;
     TextView mDescriptionTextView;
     TextView mUsernameTextView;
+    TextView mTags;
     ChartView mChart1, mChart2, mChart3, mChart4, mChart5, mChart6, mChart7, mChart8;
+
+    // Extras
+    View mChannelExtrasView;
+    ProgressBar mChannelExtrasProgressBar;
+
 
     // Loading View
     View mLoadingView;
@@ -66,6 +74,7 @@ public class ChannelActivity extends ActionBarActivity implements View.OnClickLi
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mDescriptionTextView = (TextView) findViewById(R.id.description);
         mUsernameTextView = (TextView) findViewById(R.id.username);
+        mTags = (TextView) findViewById(R.id.tags);
 
         mChart1 = (ChartView) findViewById(R.id.chart1);
         mChart2 = (ChartView) findViewById(R.id.chart2);
@@ -82,15 +91,18 @@ public class ChannelActivity extends ActionBarActivity implements View.OnClickLi
         mInputChannelReadKey = (EditText) findViewById(R.id.input_channelReadKey);
         mRetryButton = (BootstrapButton) findViewById(R.id.channelRetryButton);
 
+        mChannelExtrasView = findViewById(R.id.channel_more_info_content);
+        mChannelExtrasProgressBar = (ProgressBar) findViewById(R.id.channel_more_info_progressbar);
+
         mRetryButton.setOnClickListener(this);
 
         setSupportActionBar(mToolbar);
 
         // TODO: Check if channel has settings saved, use those settings to get a single feed. if not, use default (last 100 data points)
-        ApiClient.getInstance().getChannelFeed(mChannelId, mChannelReadKey, null, onInfoCallback());
+        ApiClient.getInstance().getChannelFeed(mChannelId, mChannelReadKey, null, onContentInfoCallback());
     }
 
-    private Callback<ChannelFeed> onInfoCallback() {
+    private Callback<ChannelFeed> onContentInfoCallback() {
         return new Callback<ChannelFeed>() {
             @Override
             public void success(ChannelFeed channelFeed, Response response) {
@@ -98,6 +110,23 @@ public class ChannelActivity extends ActionBarActivity implements View.OnClickLi
                 showContent();
                 updateChannelInfo();
                 updateCharts();
+                // Get more info about this channel
+                ApiClient.getInstance().getChannel(mChannelId, mChannelReadKey, new Callback<Channel>() {
+                    @Override
+                    public void success(Channel channel, Response response) {
+                        mChannelFeed.getChannel().setMetadata(channel.getMetadata());
+                        mChannelFeed.getChannel().setElevation(channel.getElevation());
+                        mChannelFeed.getChannel().setRanking(channel.getRanking());
+                        mChannelFeed.getChannel().setUsername(channel.getUsername());
+                        mChannelFeed.getChannel().setTags(channel.getTags());
+                        updateExtraInfo();
+                    }
+                    @Override
+                    public void failure(RetrofitError error) {
+                        updateExtraInfo();
+                        Toast.makeText(getBaseContext(),"Fetching channel extra info failed.",Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             @Override
@@ -113,6 +142,18 @@ public class ChannelActivity extends ActionBarActivity implements View.OnClickLi
 
             }
         };
+    }
+
+    private void updateExtraInfo() {
+        mChannelExtrasProgressBar.setVisibility(View.GONE);
+        mUsernameTextView.setText(mChannelFeed.getChannel().getUsername());
+        String tags = "";
+        for(int i = 0; i < mChannelFeed.getChannel().getTags().size(); i++){
+            tags += mChannelFeed.getChannel().getTags().get(i).getName() + (mChannelFeed.getChannel().getTags().size() - 1 == i ? "" : ", ");
+        }
+
+        mTags.setText(tags);
+        mChannelExtrasView.setVisibility(View.VISIBLE);
     }
 
     private void updateChannelInfo() {
@@ -219,7 +260,7 @@ public class ChannelActivity extends ActionBarActivity implements View.OnClickLi
             }
 
             mRetryButton.setBootstrapButtonEnabled(false);
-            ApiClient.getInstance().getChannelFeed(mChannelId, mChannelReadKey, null, onInfoCallback());
+            ApiClient.getInstance().getChannelFeed(mChannelId, mChannelReadKey, null, onContentInfoCallback());
             showLoading();
         }
     }

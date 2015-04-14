@@ -12,7 +12,7 @@
         android:id="@+id/channelContentView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,6 +34,19 @@
                     android:padding="12dp"
                     android:text="Description" />
 
+                <ProgressBar
+                    android:id="@+id/channel_more_info_progressbar"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_horizontal"
+                    android:indeterminate="true"/>
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/channel_more_info_content"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp">
                 <TextView
                     android:id="@+id/username"
                     style="@style/TextAppearance.AppCompat.Body2"
@@ -70,8 +83,8 @@
                         style="@style/TextAppearance.AppCompat.Caption"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="4dp"
-                        android:text="Tag1, Tag2, Tag3" />
+                        android:paddingLeft="4dp" />
+                </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 

@@ -66,7 +66,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="4dp"
-                android:text="Tag1, Tag2, Tag3"
                 style="@style/TextAppearance.AppCompat.Caption"/>
         </LinearLayout>
     </LinearLayout>
