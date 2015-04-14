@@ -4,12 +4,14 @@ import com.villevalta.thingspeakclient.BuildConfig;
 import com.villevalta.thingspeakclient.model.Channel;
 import com.villevalta.thingspeakclient.model.ChannelFeed;
 
-import java.util.List;
 import java.util.Map;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
-import retrofit.http.*;
+import retrofit.http.GET;
+import retrofit.http.Path;
+import retrofit.http.Query;
+import retrofit.http.QueryMap;
 
 /**
  * Created by villevalta on 24.3.2015.
@@ -73,7 +75,7 @@ public class ApiClient {
 		// Channel Feeds
 
 		@GET("/" + ENDPOINT_CHANNELS + "/" +"{id}" +"/" + ENDPOINT_FEEDS + MARKUP)
-		void getChannelFeed(@Path("id") int id, @Header("api_key") String apiKey, @QueryMap Map<String, String> parameters, Callback<ChannelFeed> callback);
+		void getChannelFeed(@Path("id") int id, @Query("api_key") String apiKey, @QueryMap Map<String, String> parameters, Callback<ChannelFeed> callback);
 
 		// User
 
