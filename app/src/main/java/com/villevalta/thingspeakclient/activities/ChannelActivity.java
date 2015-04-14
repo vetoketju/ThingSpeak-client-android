@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.LineData;
 import com.villevalta.thingspeakclient.R;
 import com.villevalta.thingspeakclient.model.ChannelFeed;
 import com.villevalta.thingspeakclient.network.ApiClient;
@@ -92,69 +94,39 @@ public class ChannelActivity extends ActionBarActivity {
     }
 
     private void updateCharts() {
-
-        if (mChannelFeed.getChannel().getField(1) != null && !mChannelFeed.getChannel().getField(1).equals("")) {
-            mChart1.setVisibility(View.VISIBLE);
-            mChart1.setTitle(mChannelFeed.getChannel().getField(1));
-            mChart1.setData(mChannelFeed.getLineData(1));
-        } else {
-            mChart1.setVisibility(View.GONE);
+        for(int i = 1; i <= 8; i++ ){
+            setupChart(i);
         }
+    }
 
-        if (mChannelFeed.getChannel().getField(2) != null && !mChannelFeed.getChannel().getField(2).equals("")) {
-            mChart2.setVisibility(View.VISIBLE);
-            mChart2.setTitle(mChannelFeed.getChannel().getField(2));
-            mChart2.setData(mChannelFeed.getLineData(2));
+    private void setupChart(int index){
+        if (mChannelFeed.getChannel().getField(index) != null && !mChannelFeed.getChannel().getField(index).equals("")) {
+            getChart(index).setVisibility(View.VISIBLE);
+            getChart(index).setTitle(mChannelFeed.getChannel().getField(index));
+            LineData data = mChannelFeed.getLineData(index);
+
+            // Check if there is data to show
+            if(data != null && data.getDataSets().size() > 0){
+                getChart(index).setData(data);
+            }
+
         } else {
-            mChart2.setVisibility(View.GONE);
+            getChart(index).setVisibility(View.GONE);
         }
+    }
 
-        if (mChannelFeed.getChannel().getField(3) != null && !mChannelFeed.getChannel().getField(3).equals("")) {
-            mChart3.setVisibility(View.VISIBLE);
-            mChart3.setTitle(mChannelFeed.getChannel().getField(3));
-            mChart3.setData(mChannelFeed.getLineData(3));
-        } else {
-            mChart3.setVisibility(View.GONE);
-        }
+    private ChartView getChart(int index){
+        switch (index){
+            case 1: return mChart1;
+            case 2: return mChart2;
+            case 3: return mChart3;
+            case 4: return mChart4;
+            case 5: return mChart5;
+            case 6: return mChart6;
+            case 7: return mChart7;
+            case 8: return mChart8;
 
-        if (mChannelFeed.getChannel().getField(4) != null && !mChannelFeed.getChannel().getField(4).equals("")) {
-            mChart4.setVisibility(View.VISIBLE);
-            mChart4.setTitle(mChannelFeed.getChannel().getField(4));
-            mChart4.setData(mChannelFeed.getLineData(4));
-        } else {
-            mChart4.setVisibility(View.GONE);
-        }
-
-        if (mChannelFeed.getChannel().getField(5) != null && !mChannelFeed.getChannel().getField(5).equals("")) {
-            mChart5.setVisibility(View.VISIBLE);
-            mChart5.setTitle(mChannelFeed.getChannel().getField(5));
-            mChart5.setData(mChannelFeed.getLineData(5));
-        } else {
-            mChart5.setVisibility(View.GONE);
-        }
-
-        if (mChannelFeed.getChannel().getField(6) != null && !mChannelFeed.getChannel().getField(6).equals("")) {
-            mChart6.setVisibility(View.VISIBLE);
-            mChart6.setTitle(mChannelFeed.getChannel().getField(6));
-            mChart6.setData(mChannelFeed.getLineData(6));
-        } else {
-            mChart6.setVisibility(View.GONE);
-        }
-
-        if (mChannelFeed.getChannel().getField(7) != null && !mChannelFeed.getChannel().getField(7).equals("")) {
-            mChart7.setVisibility(View.VISIBLE);
-            mChart7.setTitle(mChannelFeed.getChannel().getField(7));
-            mChart7.setData(mChannelFeed.getLineData(7));
-        } else {
-            mChart7.setVisibility(View.GONE);
-        }
-
-        if (mChannelFeed.getChannel().getField(8) != null && !mChannelFeed.getChannel().getField(8).equals("")) {
-            mChart8.setVisibility(View.VISIBLE);
-            mChart8.setTitle(mChannelFeed.getChannel().getField(8));
-            mChart8.setData(mChannelFeed.getLineData(8));
-        } else {
-            mChart8.setVisibility(View.GONE);
+            default:return null;
         }
     }
 
