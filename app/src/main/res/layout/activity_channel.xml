@@ -9,9 +9,10 @@
     <include layout="@layout/view_toolbar" />
 
     <ScrollView
-        android:id="@+id/scrollView"
+        android:id="@+id/ChannelView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,8 +23,8 @@
                 android:id="@+id/channel_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@color/white">
+                android:background="@color/white"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/description"
@@ -78,65 +79,122 @@
                 android:id="@+id/chartswrapper"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingBottom="@dimen/padding_medium"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/padding_medium">
 
                 <com.villevalta.thingspeakclient.ui.views.ChartView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
                     android:id="@+id/chart1"
-                    android:layout_marginTop="@dimen/padding_medium"/>
-
-                <com.villevalta.thingspeakclient.ui.views.ChartView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/padding_medium"
+                    android:visibility="gone"/>
+
+                <com.villevalta.thingspeakclient.ui.views.ChartView
                     android:id="@+id/chart2"
-                    android:layout_marginTop="@dimen/padding_medium"/>
-
-                <com.villevalta.thingspeakclient.ui.views.ChartView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/padding_medium"
+                    android:visibility="gone"/>
+
+                <com.villevalta.thingspeakclient.ui.views.ChartView
                     android:id="@+id/chart3"
-                    android:layout_marginTop="@dimen/padding_medium"/>
-
-                <com.villevalta.thingspeakclient.ui.views.ChartView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/padding_medium"
+                    android:visibility="gone"/>
+
+                <com.villevalta.thingspeakclient.ui.views.ChartView
                     android:id="@+id/chart4"
-                    android:layout_marginTop="@dimen/padding_medium"/>
-
-                <com.villevalta.thingspeakclient.ui.views.ChartView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/padding_medium"
+                    android:visibility="gone"/>
+
+                <com.villevalta.thingspeakclient.ui.views.ChartView
                     android:id="@+id/chart5"
-                    android:layout_marginTop="@dimen/padding_medium"/>
-
-                <com.villevalta.thingspeakclient.ui.views.ChartView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/padding_medium"
+                    android:visibility="gone"/>
+
+                <com.villevalta.thingspeakclient.ui.views.ChartView
                     android:id="@+id/chart6"
-                    android:layout_marginTop="@dimen/padding_medium"/>
-
-                <com.villevalta.thingspeakclient.ui.views.ChartView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/padding_medium"
+                    android:visibility="gone"/>
+
+                <com.villevalta.thingspeakclient.ui.views.ChartView
                     android:id="@+id/chart7"
-                    android:layout_marginTop="@dimen/padding_medium"/>
-
-                <com.villevalta.thingspeakclient.ui.views.ChartView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/padding_medium"
+                    android:visibility="gone"/>
+
+                <com.villevalta.thingspeakclient.ui.views.ChartView
                     android:id="@+id/chart8"
-                    android:layout_marginTop="@dimen/padding_medium"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/padding_medium"
+                    android:visibility="gone"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/channelErrorView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/channelErrorMessage"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"/>
+
+        <TextView
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_large"
+            android:text="Channel ID"
+            />
+
+        <EditText
+            android:id="@+id/input_channelId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
+
+        <TextView
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_large"
+            android:text="Channel read key"/>
+
+        <EditText
+            android:id="@+id/input_channelReadKey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Optional"/>
+
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            android:id="@+id/channelRetryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_large"
+            android:text="Retry"
+            app:bb_icon_left="fa-refresh"
+            app:bb_roundedCorners="true"
+            app:bb_type="primary"
+            />
+
+    </LinearLayout>
+
 </LinearLayout>
