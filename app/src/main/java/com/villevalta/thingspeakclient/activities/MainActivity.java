@@ -1,19 +1,19 @@
 package com.villevalta.thingspeakclient.activities;
 
 import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.support.v4.widget.DrawerLayout;
-import android.widget.Toast;
 
 import com.villevalta.thingspeakclient.R;
 import com.villevalta.thingspeakclient.fragments.PublicChannelsFragment;
 import com.villevalta.thingspeakclient.fragments.RecyclerListFragment;
+import com.villevalta.thingspeakclient.ui.dialogs.OpenChannelDialog;
 import com.villevalta.thingspeakclient.ui.navigation.DrawerNavItem;
 import com.villevalta.thingspeakclient.ui.navigation.NavigationDrawerFragment;
 import com.villevalta.thingspeakclient.ui.toolbar.HideableToolbar;
@@ -138,8 +138,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 			return true;
 		}
 		else if (id == R.id.action_openchannel) {
-			Toast.makeText(this, "Open channel pressed.", Toast.LENGTH_SHORT).show();
-			// TODO: Add input dialog here that has "channel id", "Read Key"...
+			new OpenChannelDialog().show(getSupportFragmentManager(),"OpenChannelDialog");
 			return true;
 		}
 		else if (id == R.id.action_settings) {

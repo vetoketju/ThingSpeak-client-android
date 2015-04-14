@@ -39,7 +39,7 @@ public class ChannelFeed {
 	public LineData getLineData(int field){
 
 		// Check if field exists
-		if(channel.getField(field) != null){
+		if(channel.getField(field) != null && feeds.size() > 0){
 
 			ArrayList<String> xVals = new ArrayList<>();
 			ArrayList<Entry> results = new ArrayList<>();
