@@ -1,15 +1,20 @@
 ThingSpeak-client-android
 =========
 [Thingspeak](https://thingspeak.com/) client for android. Status: in development. [Screenshots](http://imgur.com/a/UXOpC)
-## Planned features
+## Planned features MVP
 * List public channels
 * Favorite channels
-* View a channel and its feeds
+* View a channel and its feeds/charts
 * Interactive charts
-* Launcher widgets of field feeds
-* Change API location (default = api.thingspeak.com)
+* Open channel with ID and Read key
 * Save read keys
 * Material style
+* share channel url
+* autorefresh on/off
+
+# Planned features
+* Launcher widgets: Charts / latest value
+* Export/Import chart properties and styles, favorites, saved read keys
 
 ## Links
 
