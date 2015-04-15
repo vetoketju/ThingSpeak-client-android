@@ -96,7 +96,7 @@ public abstract class RecyclerListFragment extends Fragment implements SwipeRefr
 	}
 
 	public void hideRefreshing() {
-		if(mSwipeRefreshLayout.isRefreshing()){
+		if(mSwipeRefreshLayout != null && mSwipeRefreshLayout.isRefreshing()){
 			mSwipeRefreshLayout.post(new Runnable() {
 				@Override
 				public void run() {

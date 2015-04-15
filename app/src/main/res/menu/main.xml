@@ -2,14 +2,8 @@
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
       tools:context=".MainActivity">
-    <item android:id="@+id/action_search"
-          android:title="@string/action_search"
-          android:icon="@android:drawable/ic_menu_search"
-          app:showAsAction="ifRoom"/>
     <item android:id="@+id/action_openchannel"
           android:title="@string/action_openchannel"
-          app:showAsAction="never"/>
-    <item android:id="@+id/action_settings"
-          android:title="@string/action_settings"
-          app:showAsAction="never"/>
+          android:icon="@android:drawable/ic_menu_set_as"
+          app:showAsAction="ifRoom"/>
 </menu>

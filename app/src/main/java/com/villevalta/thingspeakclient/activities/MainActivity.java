@@ -49,7 +49,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 		mNavigationDrawerFragment = (NavigationDrawerFragment) mFragmentManager.findFragmentById(R.id.navigation_drawer);
 
 		mNavigationDrawerFragment.addNavItem(new DrawerNavItemFragment("Public Channels", "fa-globe", PublicChannelsFragment.class));
+		mNavigationDrawerFragment.addNavItem(new DrawerNavItemFragment("Favorites", "fa-bookmark", PublicChannelsFragment.class));
 		mNavigationDrawerFragment.addNavItem(new DrawerNavItemActivity("Search", "fa-search", SearchActivity.class));
+		mNavigationDrawerFragment.addNavItem(new DrawerNavItemActivity("Settings", "fa-cogs", SettingsActivity.class));
 
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
@@ -139,16 +141,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
 
-		if (id == R.id.action_search) {
-			Intent i = new Intent(this, SearchActivity.class);
-			startActivity(i);
-			return true;
-		} else if (id == R.id.action_openchannel) {
+		if (id == R.id.action_openchannel) {
 			new OpenChannelDialog().show(getSupportFragmentManager(), "OpenChannelDialog");
-			return true;
-		} else if (id == R.id.action_settings) {
-			Intent i = new Intent(this, SettingsActivity.class);
-			startActivity(i);
 			return true;
 		}
 
