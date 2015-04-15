@@ -12,7 +12,7 @@ ThingSpeak-client-android
 * share channel url
 * autorefresh on/off
 
-### Planned features
+### Planned features in the future
 * Launcher widgets: Charts / latest value
 * Export/Import chart properties and styles, favorites, saved read keys
 
