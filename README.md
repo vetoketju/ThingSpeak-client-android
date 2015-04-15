@@ -11,6 +11,8 @@ ThingSpeak-client-android
 * Material style
 * share channel url
 * autorefresh on/off
+* search by tag or username
+* user details page / list users channels
 
 ### Planned features in the future
 * Launcher widgets: Charts / latest value
