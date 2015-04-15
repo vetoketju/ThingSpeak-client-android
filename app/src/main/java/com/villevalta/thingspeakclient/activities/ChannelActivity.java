@@ -1,5 +1,6 @@
 package com.villevalta.thingspeakclient.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -96,6 +97,7 @@ public class ChannelActivity extends ActionBarActivity implements View.OnClickLi
         mChannelExtrasProgressBar = (ProgressBar) findViewById(R.id.channel_more_info_progressbar);
 
         mRetryButton.setOnClickListener(this);
+        mUsernameTextView.setOnClickListener(this);
 
         setSupportActionBar(mToolbar);
 
@@ -264,6 +266,12 @@ public class ChannelActivity extends ActionBarActivity implements View.OnClickLi
             mRetryButton.setBootstrapButtonEnabled(false);
             ApiClient.getInstance().getChannelFeed(mChannelId, mChannelReadKey, null, onContentInfoCallback());
             showLoading();
+        }else if(v.getId() == mUsernameTextView.getId()){
+            if(mChannelFeed.getChannel().getUsername() != null && !mChannelFeed.getChannel().getUsername().equals("")){
+                Intent intent = new Intent(this, UserActivity.class);
+                intent.putExtra("username", mChannelFeed.getChannel().getUsername());
+                startActivity(intent);
+            }
         }
     }
 

@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.villevalta.thingspeakclient.R;
 import com.villevalta.thingspeakclient.activities.ChannelActivity;
+import com.villevalta.thingspeakclient.activities.UserActivity;
 import com.villevalta.thingspeakclient.model.Channel;
 import com.villevalta.thingspeakclient.model.ListViewable;
 
@@ -60,7 +61,9 @@ public class ChannelViewHolder extends ViewHolder implements View.OnClickListene
 	@Override
 	public void onClick(View v) {
 		if(v.getId() == mUsername.getId()){
-			// TODO: open user activity
+			Intent intent = new Intent(root.getContext(), UserActivity.class);
+			intent.putExtra("username", mChannel.getUsername());
+			root.getContext().startActivity(intent);
 		}else{
 			Intent intent = new Intent(root.getContext(), ChannelActivity.class);
 			intent.putExtra("id", mChannel.getId());
