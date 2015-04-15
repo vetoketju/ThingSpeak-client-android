@@ -3,6 +3,7 @@ package com.villevalta.thingspeakclient.activities;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -159,6 +160,7 @@ public class ChannelActivity extends ActionBarActivity implements View.OnClickLi
     private void updateChannelInfo() {
         mToolbar.setTitle(mChannelFeed.getChannel().getName());
         mDescriptionTextView.setText(mChannelFeed.getChannel().getDescription());
+        Linkify.addLinks(mDescriptionTextView, Linkify.ALL);
         mUsernameTextView.setText("By " + mChannelFeed.getChannel().getUsername());
     }
 

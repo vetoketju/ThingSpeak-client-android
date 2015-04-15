@@ -1,8 +1,7 @@
 package com.villevalta.thingspeakclient.ui.holder;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
+import android.text.util.Linkify;
 import android.view.View;
 import android.widget.TextView;
 
@@ -41,6 +40,7 @@ public class ChannelViewHolder extends ViewHolder implements View.OnClickListene
 
 		mTitle.setText(mChannel.getName());
 		mDescription.setText(mChannel.getDescription());
+		Linkify.addLinks(mDescription, Linkify.ALL);
 		mUsername.setText("By " + mChannel.getUsername());
 
 		String tags = "";
