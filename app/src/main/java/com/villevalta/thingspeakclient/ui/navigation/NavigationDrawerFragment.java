@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.villevalta.thingspeakclient.R;
 
@@ -181,7 +180,7 @@ public class NavigationDrawerFragment extends Fragment {
 	// Update this state, by title
 	public void update(String title){
 		int pos = 0;
-		for(DrawerNavItem item : mListAdapter.getItems()){
+		for(NavItem item : mListAdapter.getItems()){
 			if(item.getTitle().equals(title)){
 				pos = mListAdapter.getPosition(item);
 			}
@@ -259,7 +258,7 @@ public class NavigationDrawerFragment extends Fragment {
 		return super.onOptionsItemSelected(item);
 	}
 
-	public void addNavItem(DrawerNavItem item)
+	public void addNavItem(NavItem item)
 	{
 		mListAdapter.add(item);
 	}
@@ -274,7 +273,7 @@ public class NavigationDrawerFragment extends Fragment {
 	 * Callbacks interface that all activities using this fragment must implement.
 	 */
 	public interface NavigationDrawerCallbacks {
-		void onNavigationDrawerItemSelected(DrawerNavItem selected, int position);
+		void onNavigationDrawerItemSelected(NavItem selected, int position);
 		void RestoreChosenActivityTitle();
 		void showGlobalContextActionBar();
 	}

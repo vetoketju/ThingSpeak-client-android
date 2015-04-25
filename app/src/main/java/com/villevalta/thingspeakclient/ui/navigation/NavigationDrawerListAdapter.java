@@ -4,7 +4,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.beardedhen.androidbootstrap.FontAwesomeText;
@@ -18,24 +17,24 @@ import java.util.List;
  */
 public class NavigationDrawerListAdapter extends BaseAdapter {
 
-	private ArrayList<DrawerNavItem> drawerNavItems = new ArrayList<>();
+	private ArrayList<NavItem> navItems = new ArrayList<>();
 
-	public void add(DrawerNavItem item){
-		drawerNavItems.add(item);
+	public void add(NavItem item){
+		navItems.add(item);
 	}
 
-	public void addAll(List<DrawerNavItem> items) {
-		drawerNavItems.addAll(items);
+	public void addAll(List<NavItem> items) {
+		navItems.addAll(items);
 	}
 
 	@Override
 	public int getCount() {
-		return drawerNavItems.size();
+		return navItems.size();
 	}
 
 	@Override
-	public DrawerNavItem getItem(int position) {
-		return drawerNavItems.get(position);
+	public NavItem getItem(int position) {
+		return navItems.get(position);
 	}
 
 	@Override
@@ -48,7 +47,7 @@ public class NavigationDrawerListAdapter extends BaseAdapter {
 
 		convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.drawer_nav_item,parent,false);
 
-		DrawerNavItem current = drawerNavItems.get(position);
+		NavItem current = navItems.get(position);
 
 		if(current.getIcon() != null && current.getIcon() != ""){
 			((FontAwesomeText) convertView.findViewById(R.id.icon)).setIcon(current.getIcon());
@@ -59,11 +58,11 @@ public class NavigationDrawerListAdapter extends BaseAdapter {
 		return convertView;
 	}
 
-	public ArrayList<DrawerNavItem> getItems() {
-		return drawerNavItems;
+	public ArrayList<NavItem> getItems() {
+		return navItems;
 	}
 
-	public int getPosition(DrawerNavItem item) {
-		return drawerNavItems.indexOf(item);
+	public int getPosition(NavItem item) {
+		return navItems.indexOf(item);
 	}
 }

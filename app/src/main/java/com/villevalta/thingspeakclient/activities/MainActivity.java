@@ -13,9 +13,9 @@ import com.villevalta.thingspeakclient.R;
 import com.villevalta.thingspeakclient.fragments.PublicChannelsFragment;
 import com.villevalta.thingspeakclient.fragments.RecyclerListFragment;
 import com.villevalta.thingspeakclient.ui.dialogs.OpenChannelDialog;
-import com.villevalta.thingspeakclient.ui.navigation.DrawerNavItem;
-import com.villevalta.thingspeakclient.ui.navigation.DrawerNavItemActivity;
-import com.villevalta.thingspeakclient.ui.navigation.DrawerNavItemFragment;
+import com.villevalta.thingspeakclient.ui.navigation.NavItem;
+import com.villevalta.thingspeakclient.ui.navigation.NavItemActivity;
+import com.villevalta.thingspeakclient.ui.navigation.NavItemFragment;
 import com.villevalta.thingspeakclient.ui.navigation.NavigationDrawerFragment;
 import com.villevalta.thingspeakclient.ui.toolbar.HideableToolbar;
 
@@ -48,10 +48,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
 		mNavigationDrawerFragment = (NavigationDrawerFragment) mFragmentManager.findFragmentById(R.id.navigation_drawer);
 
-		mNavigationDrawerFragment.addNavItem(new DrawerNavItemFragment("Public Channels", "fa-globe", PublicChannelsFragment.class));
-		mNavigationDrawerFragment.addNavItem(new DrawerNavItemFragment("Favorites", "fa-bookmark", PublicChannelsFragment.class));
-		mNavigationDrawerFragment.addNavItem(new DrawerNavItemActivity("Search", "fa-search", SearchActivity.class));
-		mNavigationDrawerFragment.addNavItem(new DrawerNavItemActivity("Settings", "fa-cogs", SettingsActivity.class));
+		mNavigationDrawerFragment.addNavItem(new NavItemFragment("Public Channels", "fa-globe", PublicChannelsFragment.class));
+		mNavigationDrawerFragment.addNavItem(new NavItemFragment("Favorites", "fa-bookmark", PublicChannelsFragment.class));
+		mNavigationDrawerFragment.addNavItem(new NavItemActivity("Search", "fa-search", SearchActivity.class));
+		mNavigationDrawerFragment.addNavItem(new NavItemActivity("Settings", "fa-cogs", SettingsActivity.class));
 
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
@@ -73,9 +73,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 	}
 
 	@Override
-	public void onNavigationDrawerItemSelected(DrawerNavItem selected, int position) {
+	public void onNavigationDrawerItemSelected(NavItem selected, int position) {
 
-		if (selected instanceof DrawerNavItemFragment) {
+		if (selected instanceof NavItemFragment) {
 			// update the main content by replacing fragments
 			try {
 				mTitle = selected.getTitle();
@@ -83,7 +83,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 				boolean popped = mFragmentManager.popBackStackImmediate(mTitle.toString(), 0);
 				if (!popped) {
 					setWindowTitle(mTitle.toString());
-					mCurrentActiveFragment = ((DrawerNavItemFragment) selected).getFragmentClass().newInstance();
+					mCurrentActiveFragment = ((NavItemFragment) selected).getFragmentClass().newInstance();
 
 					if (mCurrentActiveFragment instanceof RecyclerListFragment) {
 						((RecyclerListFragment) mCurrentActiveFragment).setmHideableToolbar(mToolbar);
@@ -97,8 +97,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (selected instanceof DrawerNavItemActivity) {
-			Intent i = new Intent(this, ((DrawerNavItemActivity) selected).getActivityClass());
+		} else if (selected instanceof NavItemActivity) {
+			Intent i = new Intent(this, ((NavItemActivity) selected).getActivityClass());
 			startActivity(i);
 		}
 	}

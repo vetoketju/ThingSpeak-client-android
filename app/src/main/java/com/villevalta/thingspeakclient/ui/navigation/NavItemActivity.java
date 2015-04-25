@@ -5,11 +5,11 @@ import android.app.Activity;
 /**
  * Created by villevalta on 15.4.2015.
  */
-public class DrawerNavItemActivity extends DrawerNavItem{
+public class NavItemActivity extends NavItem {
 
 	Class<? extends Activity> activityClass;
 
-	public DrawerNavItemActivity(String title, String fa_icon, Class<? extends Activity> activityClass) {
+	public NavItemActivity(String title, String fa_icon, Class<? extends Activity> activityClass) {
 		super(title, fa_icon);
 		this.activityClass = activityClass;
 	}

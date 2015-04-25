@@ -5,11 +5,11 @@ import android.support.v4.app.Fragment;
 /**
  * Created by villevalta on 15.4.2015.
  */
-public class DrawerNavItemFragment extends DrawerNavItem {
+public class NavItemFragment extends NavItem {
 
 	Class<? extends Fragment> fragmentClass;
 
-	public DrawerNavItemFragment(String title, String fa_icon, Class<? extends Fragment> fragmentClass) {
+	public NavItemFragment(String title, String fa_icon, Class<? extends Fragment> fragmentClass) {
 		super(title, fa_icon);
 		this.fragmentClass = fragmentClass;
 	}
