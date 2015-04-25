@@ -45,4 +45,3 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 		return tabs.size();
 	}
 }
-// clasu, tiikeri(tablet pidike), alko, punnari
