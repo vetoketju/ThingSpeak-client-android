@@ -32,13 +32,17 @@ Android bootstrap buttons and fontAwesome: https://github.com/Bearded-Hen/Androi
 
 Font Awesome Cheatsheet: http://fortawesome.github.io/Font-Awesome/cheatsheet/
 
-Android Best practices by futurice: https://github.com/futurice/android-best-practices
-
 Font Awesome png icon generator: http://fa2png.io/
 
 Google Material design guidelines: http://www.google.com/design/spec/material-design/introduction.html
 
 MPAndroidChart wiki: https://github.com/PhilJay/MPAndroidChart/wiki
+
+Android Best practices by futurice:
+https://github.com/futurice/android-best-practices
+
+More
+https://github.com/anirudh24seven/android-dev-readme
 
 ## License
         The MIT License (MIT)
