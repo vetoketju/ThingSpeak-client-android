@@ -4,16 +4,18 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
+import android.database.sqlite.SQLiteCursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.widget.SearchView;
 import android.util.AttributeSet;
+import android.widget.Toast;
 
 /**
  * Created by villevalta on 25.4.2015.
  */
-public class SuggestionSearchView extends SearchView implements SearchView.OnQueryTextListener {
+public class SuggestionSearchView extends SearchView implements SearchView.OnQueryTextListener, SearchView.OnSuggestionListener {
 
 	SuggestionsDatabase mDatabase;
 	SuggestionSearchViewCallbacks listener;
@@ -36,9 +38,10 @@ public class SuggestionSearchView extends SearchView implements SearchView.OnQue
 
 	private void init(){
 		super.setOnQueryTextListener(this);
+		super.setOnSuggestionListener(this);
 	}
 
-	public void initialize(String suggestionTable){
+	public void setSuggestionTable(String suggestionTable){
 		mDatabase = new SuggestionsDatabase(getContext(), suggestionTable);
 	}
 
@@ -55,17 +58,50 @@ public class SuggestionSearchView extends SearchView implements SearchView.OnQue
 	public boolean onQueryTextSubmit(String s) {
 
 		if(s.length() >= minQueryLength){
-			// TODO ADD TO DATABASE
+			if(mDatabase != null) mDatabase.insertSuggestion(s);
 			if(listener != null) listener.onSubmit(s);
-			return true;
+			clearFocus();
+		}else{
+			Toast.makeText(getContext(),"Min. "+minQueryLength+" characters.",Toast.LENGTH_SHORT).show();
 		}
+
+		//true if the query has been handled by the listener, false to let the SearchView perform the default action.
+		return true;
+	}
+
+	@Override
+	public boolean onQueryTextChange(String s) {
+		//false if the SearchView should perform the default action of showing any suggestions if available, true if the action was handled by the listener.
+		if(s.length() == 0 && listener != null){
+			listener.onCleared();
+		}
+
+
+		// todo: show suggestions
+		 if(mDatabase != null){
+			Cursor cursor = mDatabase.getSuggestions(s);
+			 if(cursor.getCount() > 0){
+				String[] columns = new String[]{SuggestionsDatabase.FIELD_SUGGESTION};
+				int[] columnTextId = new int[] { android.R.id.text1};
+				setSuggestionsAdapter(new SearchSuggestionSimpleCursorAdapter(getContext(), android.R.layout.simple_list_item_1, cursor, columns, columnTextId, 0));
+			 }
+		}
+
+
 
 		return false;
 	}
 
 	@Override
-	public boolean onQueryTextChange(String s) {
-		// TODO SHOW SUGGESTIONS!!!
+	public boolean onSuggestionSelect(int position) {
+		return false;
+	}
+
+	@Override
+	public boolean onSuggestionClick(int position) {
+		SQLiteCursor cursor = (SQLiteCursor) getSuggestionsAdapter().getItem(position);
+		int indexColumnSuggestion = cursor.getColumnIndex(SuggestionsDatabase.FIELD_SUGGESTION);
+		setQuery(cursor.getString(indexColumnSuggestion), false);
 		return true;
 	}
 
@@ -105,7 +141,7 @@ public class SuggestionSearchView extends SearchView implements SearchView.OnQue
 
 		public Cursor getSuggestions(String text) //UNIQUE ON CONFLICT REPLACE
 		{
-			// TODO make nicer
+			// TODO make nicer ?
 			text +="%";
 			return db.query(suggestionTable, new String[]{FIELD_ID, FIELD_SUGGESTION}, FIELD_SUGGESTION + " LIKE " + DatabaseUtils.sqlEscapeString(text), null, null, null, null);
 		}
