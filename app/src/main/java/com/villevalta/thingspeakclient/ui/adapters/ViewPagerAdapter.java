@@ -32,9 +32,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 	public Fragment getItem(int position) {
 		try {
 			return tabs.get(position).getFragmentClass().newInstance();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;

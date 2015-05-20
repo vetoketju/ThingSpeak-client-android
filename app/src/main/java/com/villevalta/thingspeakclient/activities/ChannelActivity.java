@@ -2,7 +2,7 @@ package com.villevalta.thingspeakclient.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.util.Linkify;
 import android.util.Log;
@@ -28,7 +28,7 @@ import retrofit.client.Response;
 /**
  * Created by villevalta on 31.3.2015.
  */
-public class ChannelActivity extends ActionBarActivity implements View.OnClickListener {
+public class ChannelActivity extends AppCompatActivity implements View.OnClickListener {
 
     int mChannelId; // Channel id
     String mChannelReadKey;

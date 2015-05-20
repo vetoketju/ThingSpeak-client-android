@@ -2,7 +2,7 @@ package com.villevalta.thingspeakclient.activities;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
@@ -14,7 +14,7 @@ import com.villevalta.thingspeakclient.ui.views.SuggestionSearchView;
 /**
  * Created by villevalta on 31.3.2015.
  */
-public class SearchActivity extends ActionBarActivity implements SuggestionSearchView.SuggestionSearchViewCallbacks{
+public class SearchActivity extends AppCompatActivity implements SuggestionSearchView.SuggestionSearchViewCallbacks{
 
 	Toolbar mToolbar;
 	SlidingTabLayout mTabs;
