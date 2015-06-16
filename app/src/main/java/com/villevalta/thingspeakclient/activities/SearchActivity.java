@@ -7,7 +7,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.villevalta.thingspeakclient.R;
+import com.villevalta.thingspeakclient.fragments.PublicChannelsFragment;
 import com.villevalta.thingspeakclient.ui.adapters.ViewPagerAdapter;
+import com.villevalta.thingspeakclient.ui.navigation.NavItemFragment;
 import com.villevalta.thingspeakclient.ui.views.SlidingTabLayout;
 import com.villevalta.thingspeakclient.ui.views.SuggestionSearchView;
 
@@ -34,12 +36,20 @@ public class SearchActivity extends AppCompatActivity implements SuggestionSearc
 		mTabs = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
 		mSearchView = (SuggestionSearchView) findViewById(R.id.toolbarSearchInput);
 
-		mAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-		mViewPager.setAdapter(mAdapter);
-
 		mSearchView.setSuggestionTable("search_suggestions");
 		mSearchView.setCallbacksListener(this);
 		mSearchView.setMinQueryLength(3);
+
+		mAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+
+		mAdapter.addTab(new NavItemFragment("by user", null, PublicChannelsFragment.class));
+		mAdapter.addTab(new NavItemFragment("by tag", null, PublicChannelsFragment.class));
+
+		mViewPager.setAdapter(mAdapter);
+
+		mTabs.setDistributeEvenly(true);
+		mTabs.setViewPager(mViewPager);
+
 
 		// TODO: Read parameters here "searchTerm", "type=tag/user"
 		// to use with activity that has url scheme use getIntent().getDataString() and parse as url.
