@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import com.villevalta.thingspeakclient.R;
 import com.villevalta.thingspeakclient.model.ListStatusObject;
 import com.villevalta.thingspeakclient.ui.adapters.ListContentProvider;
-import com.villevalta.thingspeakclient.ui.toolbar.HideableToolbar;
 import com.villevalta.thingspeakclient.ui.views.RecyclerListView;
 
 /**
@@ -22,7 +21,6 @@ public abstract class RecyclerListFragment extends Fragment implements SwipeRefr
 	protected SwipeRefreshLayout mSwipeRefreshLayout;
 	protected ListContentProvider mListContentProvider;
 	private int mScrollThreshold = -1;
-	private HideableToolbar mHideableToolbar;
 
 	public RecyclerListFragment(){
 
@@ -46,7 +44,6 @@ public abstract class RecyclerListFragment extends Fragment implements SwipeRefr
 
 		if(mListContentProvider != null) mRecyclerView.setListContentProvider(mListContentProvider);
 		if(mScrollThreshold >= 0) mRecyclerView.addOnScrollThresholdListener(this);
-		if(mHideableToolbar != null) mRecyclerView.addOnScrollListener(mHideableToolbar);
 
 		return v;
 	}
@@ -80,10 +77,6 @@ public abstract class RecyclerListFragment extends Fragment implements SwipeRefr
 	@Override
 	public void onThresholdOverScrolled() {
 		// this should be overridden
-	}
-
-	public void setmHideableToolbar(HideableToolbar toolbar){
-		mHideableToolbar = toolbar;
 	}
 
 	@Override

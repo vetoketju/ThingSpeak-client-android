@@ -1,151 +1,144 @@
 package com.villevalta.thingspeakclient.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.villevalta.thingspeakclient.R;
 import com.villevalta.thingspeakclient.fragments.PublicChannelsFragment;
-import com.villevalta.thingspeakclient.fragments.RecyclerListFragment;
 import com.villevalta.thingspeakclient.ui.dialogs.OpenChannelDialog;
-import com.villevalta.thingspeakclient.ui.navigation.NavItem;
-import com.villevalta.thingspeakclient.ui.navigation.NavItemActivity;
-import com.villevalta.thingspeakclient.ui.navigation.NavItemFragment;
-import com.villevalta.thingspeakclient.ui.navigation.NavigationDrawerFragment;
-import com.villevalta.thingspeakclient.ui.toolbar.HideableToolbar;
 
 
-public class MainActivity extends AppCompatActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks, FragmentManager.OnBackStackChangedListener {
+public class MainActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener, NavigationView.OnNavigationItemSelectedListener {
 
-	/**
-	 * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-	 */
-	private NavigationDrawerFragment mNavigationDrawerFragment;
+	private Toolbar mToolbar;
+	private NavigationView mNavigationView;
+	private DrawerLayout mDrawerLayout;
 
-	private FragmentManager mFragmentManager;
 	private Fragment mCurrentActiveFragment = null;
-	private HideableToolbar mToolbar;
-
-	/**
-	 * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-	 */
-	private CharSequence mTitle;
+	private int mCurrentSelectedItemId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		mToolbar = (HideableToolbar) findViewById(R.id.toolbar);
+		mToolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(mToolbar);
 
-		mFragmentManager = getSupportFragmentManager();
+		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+		mNavigationView = (NavigationView) findViewById(R.id.navigation);
 
-		mNavigationDrawerFragment = (NavigationDrawerFragment) mFragmentManager.findFragmentById(R.id.navigation_drawer);
+		mNavigationView.setNavigationItemSelectedListener(this);
 
+		ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
+			@Override
+			public void onDrawerClosed(View drawerView) {
+				super.onDrawerClosed(drawerView);
+			}
+
+			@Override
+			public void onDrawerOpened(View drawerView) {
+				super.onDrawerOpened(drawerView);
+			}
+		};
+
+		mDrawerLayout.setDrawerListener(actionBarDrawerToggle);
+		actionBarDrawerToggle.syncState();
+
+		getSupportFragmentManager().addOnBackStackChangedListener(this);
+		// initialize if savedinstance == null
+
+		if(savedInstanceState == null){
+			mNavigationView.setCheckedItem(R.id.public_channels);
+			mNavigationView.getMenu().performIdentifierAction(R.id.public_channels, 0);
+			setTitle(mNavigationView.getMenu().findItem(R.id.public_channels).getTitle());
+		}else{
+			mCurrentActiveFragment = getSupportFragmentManager().findFragmentById(R.id.container);
+			mCurrentSelectedItemId = savedInstanceState.getInt("mCurrentSelectedItemId");
+			setTitle(mNavigationView.getMenu().findItem(mCurrentSelectedItemId).getTitle());
+		}
+
+		/*
 		mNavigationDrawerFragment.addNavItem(new NavItemFragment("Public Channels", "fa-globe", PublicChannelsFragment.class));
 		mNavigationDrawerFragment.addNavItem(new NavItemFragment("Favorites", "fa-bookmark", PublicChannelsFragment.class));
 		mNavigationDrawerFragment.addNavItem(new NavItemActivity("Search", "fa-search", SearchActivity.class));
 		mNavigationDrawerFragment.addNavItem(new NavItemActivity("Settings", "fa-cogs", SettingsActivity.class));
+		*/
 
-		// Set up the drawer.
-		mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
+	}
 
-		if (savedInstanceState == null) {
-			mNavigationDrawerFragment.selectItem(0);
-			mTitle = getTitle();
-		} else {
-			mCurrentActiveFragment = mFragmentManager.findFragmentById(R.id.container);
-			if (savedInstanceState.containsKey("title"))
-				mTitle = savedInstanceState.getString("title");
-		}
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		getSupportFragmentManager().removeOnBackStackChangedListener(this);
 	}
 
 	@Override
 	public void onSaveInstanceState(Bundle b) {
 		super.onSaveInstanceState(b);
-		b.putString("title", mTitle.toString());
+		b.putInt("mCurrentSelectedItemId",mCurrentSelectedItemId);
 	}
 
 	@Override
-	public void onNavigationDrawerItemSelected(NavItem selected, int position) {
+	public boolean onNavigationItemSelected(MenuItem menuItem) {
+		mDrawerLayout.closeDrawers();
 
-		if (selected instanceof NavItemFragment) {
-			// update the main content by replacing fragments
+		if(menuItem.getItemId() == mCurrentSelectedItemId) return true;
+
+		setTitle(menuItem.getTitle());
+		mCurrentSelectedItemId = menuItem.getItemId();
+
+		boolean popped = getSupportFragmentManager().popBackStackImmediate(menuItem.getTitle().toString(), 0);
+
+		if(popped){
+			mCurrentActiveFragment = getSupportFragmentManager().findFragmentById(R.id.container);
+		}else{
 			try {
-				mTitle = selected.getTitle();
-				mToolbar.resetScroll();
-				boolean popped = mFragmentManager.popBackStackImmediate(mTitle.toString(), 0);
-				if (!popped) {
-					setWindowTitle(mTitle.toString());
-					mCurrentActiveFragment = ((NavItemFragment) selected).getFragmentClass().newInstance();
-
-					if (mCurrentActiveFragment instanceof RecyclerListFragment) {
-						((RecyclerListFragment) mCurrentActiveFragment).setmHideableToolbar(mToolbar);
-					}
-
-					mFragmentManager.beginTransaction().replace(R.id.container, mCurrentActiveFragment).addToBackStack(mTitle.toString()).commit();
-				} else {
-					mCurrentActiveFragment = mFragmentManager.findFragmentById(R.id.container);
+				switch (mCurrentSelectedItemId){
+					case R.id.public_channels:
+						mCurrentActiveFragment = PublicChannelsFragment.class.newInstance();
+						break;
+					case R.id.favorites:
+						mCurrentActiveFragment = PublicChannelsFragment.class.newInstance();
+						break;
+					case R.id.search:
+						mCurrentActiveFragment = PublicChannelsFragment.class.newInstance();
+						break;
+					case R.id.settings:
+						mCurrentActiveFragment = PublicChannelsFragment.class.newInstance();
+						break;
 				}
-
-			} catch (Exception e) {
+				getSupportFragmentManager().beginTransaction().replace(R.id.container, mCurrentActiveFragment).addToBackStack(menuItem.getTitle().toString()).commit();
+			}catch (Exception e){
 				e.printStackTrace();
+				return false;
 			}
-		} else if (selected instanceof NavItemActivity) {
-			Intent i = new Intent(this, ((NavItemActivity) selected).getActivityClass());
-			startActivity(i);
 		}
-	}
-
-	public void setWindowTitle(String newTitle) {
-		if (mToolbar != null && newTitle != null && newTitle.length() > 0)
-			mToolbar.setTitle(newTitle);
-	}
-
-	@Override
-	public void RestoreChosenActivityTitle() {
-		restoreActionBar();
-	}
-
-	@Override
-	public void showGlobalContextActionBar() {
-		mToolbar.setTitle(getResources().getString(R.string.app_name));
-	}
-
-
-	public void restoreActionBar() {
-		mToolbar.setTitle(mTitle);
+		return true;
 	}
 
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		if (!mNavigationDrawerFragment.isDrawerOpen()) {
-			// Only show items in the action bar relevant to this screen
-			// if the drawer is not showing. Otherwise, let the drawer
-			// decide what to show in the action bar.
-			getMenuInflater().inflate(R.menu.main, menu);
-			restoreActionBar();
-			return true;
-		}
-		return super.onCreateOptionsMenu(menu);
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		int id = item.getItemId();
-
-		if (id == R.id.action_openchannel) {
+		if (item.getItemId() == R.id.action_openchannel) {
 			new OpenChannelDialog().show(getSupportFragmentManager(), "OpenChannelDialog");
 			return true;
 		}
-
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -153,23 +146,24 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 	// Backstack functionality
 	@Override
 	public void onBackStackChanged() {
-		if (mFragmentManager.getBackStackEntryCount() > 0) {
-			FragmentManager.BackStackEntry entry = mFragmentManager.getBackStackEntryAt(mFragmentManager.getBackStackEntryCount() - 1);
-			mNavigationDrawerFragment.update(entry.getName());
-			mTitle = entry.getName();
-			RestoreChosenActivityTitle();
-			supportInvalidateOptionsMenu();
-			invalidateOptionsMenu();
+		if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+			FragmentManager.BackStackEntry entry = getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1);
+			setTitle(entry.getName());
+			for(int i = 0; i < mNavigationView.getMenu().size(); i++){
+				if(mNavigationView.getMenu().getItem(i).getTitle().equals(entry.getName())){
+					mNavigationView.setCheckedItem(mNavigationView.getMenu().getItem(i).getItemId());
+					break;
+				}
+			}
 		}
 	}
 
 	@Override
 	public void onBackPressed() {
-		mToolbar.resetScroll();
-		if (mNavigationDrawerFragment.isDrawerOpen()) {
-			mNavigationDrawerFragment.closeDrawer();
+		if (mDrawerLayout.isDrawerOpen(mNavigationView)) {
+			mDrawerLayout.closeDrawers();
 		} else {
-			if (mFragmentManager.getBackStackEntryCount() <= 1) {
+			if (getSupportFragmentManager().getBackStackEntryCount() <= 1) {
 				finish();
 			} else {
 				// Super calls the fragmentmanager popbackstack

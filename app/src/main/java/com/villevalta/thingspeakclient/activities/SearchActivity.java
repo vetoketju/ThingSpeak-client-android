@@ -7,9 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.villevalta.thingspeakclient.R;
-import com.villevalta.thingspeakclient.fragments.PublicChannelsFragment;
 import com.villevalta.thingspeakclient.ui.adapters.ViewPagerAdapter;
-import com.villevalta.thingspeakclient.ui.navigation.NavItemFragment;
 import com.villevalta.thingspeakclient.ui.views.SlidingTabLayout;
 import com.villevalta.thingspeakclient.ui.views.SuggestionSearchView;
 
@@ -42,8 +40,8 @@ public class SearchActivity extends AppCompatActivity implements SuggestionSearc
 
 		mAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-		mAdapter.addTab(new NavItemFragment("by user", null, PublicChannelsFragment.class));
-		mAdapter.addTab(new NavItemFragment("by tag", null, PublicChannelsFragment.class));
+		//mAdapter.addTab(new NavItemFragment("by user", null, PublicChannelsFragment.class));
+		//mAdapter.addTab(new NavItemFragment("by tag", null, PublicChannelsFragment.class));
 
 		mViewPager.setAdapter(mAdapter);
 
