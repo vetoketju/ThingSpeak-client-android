@@ -14,17 +14,12 @@
         android:layout_height="match_parent"
         >
 
-        <RelativeLayout
+        <FrameLayout
+            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-            <FrameLayout
-                android:id="@+id/container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                />
-        </RelativeLayout>
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            />
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
@@ -36,6 +31,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
                 android:minHeight="?attr/actionBarSize"
+                app:layout_scrollFlags="scroll|enterAlways"
                 />
 
         </android.support.design.widget.AppBarLayout>
