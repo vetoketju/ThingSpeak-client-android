@@ -2,6 +2,7 @@ package com.villevalta.thingspeakclient.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -14,7 +15,9 @@ import android.view.View;
 
 import com.villevalta.thingspeakclient.R;
 import com.villevalta.thingspeakclient.fragments.PublicChannelsFragment;
+import com.villevalta.thingspeakclient.fragments.SearchFragment;
 import com.villevalta.thingspeakclient.fragments.SettingsFragment;
+import com.villevalta.thingspeakclient.fragments.TabbedFragment;
 import com.villevalta.thingspeakclient.ui.dialogs.OpenChannelDialog;
 
 
@@ -23,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
 	private Toolbar mToolbar;
 	private NavigationView mNavigationView;
 	private DrawerLayout mDrawerLayout;
+	private TabLayout mTabLayout;
 
 	private Fragment mCurrentActiveFragment = null;
 	private int mCurrentSelectedItemId;
@@ -37,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
 
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mNavigationView = (NavigationView) findViewById(R.id.navigation);
+
+		mTabLayout = (TabLayout) findViewById(R.id.tabs);
 
 		mNavigationView.setNavigationItemSelectedListener(this);
 
@@ -64,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
 			setTitle(mNavigationView.getMenu().findItem(R.id.public_channels).getTitle());
 		}else{
 			mCurrentActiveFragment = getSupportFragmentManager().findFragmentById(R.id.container);
+			setUpTabs();
 			mCurrentSelectedItemId = savedInstanceState.getInt("mCurrentSelectedItemId");
 			setTitle(mNavigationView.getMenu().findItem(mCurrentSelectedItemId).getTitle());
 		}
@@ -75,6 +82,16 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
 		mNavigationDrawerFragment.addNavItem(new NavItemActivity("Settings", "fa-cogs", SettingsActivity.class));
 		*/
 
+	}
+
+	private void setUpTabs() {
+		if(mCurrentActiveFragment != null && mCurrentActiveFragment instanceof TabbedFragment){
+			mTabLayout.setVisibility(View.VISIBLE);
+			mTabLayout.setupWithViewPager(((TabbedFragment) mCurrentActiveFragment).getViewPager());
+		}else{
+			mTabLayout.setVisibility(View.GONE);
+			mTabLayout.removeAllTabs();
+		}
 	}
 
 	@Override
@@ -102,6 +119,7 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
 
 		if(popped){
 			mCurrentActiveFragment = getSupportFragmentManager().findFragmentById(R.id.container);
+			setUpTabs();
 		}else{
 			try {
 				switch (mCurrentSelectedItemId){
@@ -112,13 +130,14 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
 						mCurrentActiveFragment = PublicChannelsFragment.class.newInstance();
 						break;
 					case R.id.search:
-						mCurrentActiveFragment = PublicChannelsFragment.class.newInstance();
+						mCurrentActiveFragment = SearchFragment.class.newInstance();
 						break;
 					case R.id.settings:
 						mCurrentActiveFragment = SettingsFragment.class.newInstance();
 						break;
 				}
 				getSupportFragmentManager().beginTransaction().replace(R.id.container, mCurrentActiveFragment).addToBackStack(menuItem.getTitle().toString()).commit();
+				setUpTabs();
 			}catch (Exception e){
 				e.printStackTrace();
 				return false;
