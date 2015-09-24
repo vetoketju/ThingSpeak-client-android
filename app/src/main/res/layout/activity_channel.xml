@@ -176,7 +176,7 @@
                 android:id="@+id/channel_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                android:background="@color/background_white"
                 android:orientation="vertical"
                 app:layout_collapseMode="parallax">
 

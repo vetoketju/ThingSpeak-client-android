@@ -2,8 +2,7 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowContentOverlay">@null</item>
-
+        <!-- <item name="android:windowContentOverlay">@null</item> -->
         <!-- COLORS -->
         <item name="colorPrimary">@color/main_blue</item>
         <item name="colorPrimaryDark">@color/main_blue_dark</item>
