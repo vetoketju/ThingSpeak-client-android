@@ -14,6 +14,7 @@ import android.view.View;
 
 import com.villevalta.thingspeakclient.R;
 import com.villevalta.thingspeakclient.fragments.PublicChannelsFragment;
+import com.villevalta.thingspeakclient.fragments.SettingsFragment;
 import com.villevalta.thingspeakclient.ui.dialogs.OpenChannelDialog;
 
 
@@ -114,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
 						mCurrentActiveFragment = PublicChannelsFragment.class.newInstance();
 						break;
 					case R.id.settings:
-						mCurrentActiveFragment = PublicChannelsFragment.class.newInstance();
+						mCurrentActiveFragment = SettingsFragment.class.newInstance();
 						break;
 				}
 				getSupportFragmentManager().beginTransaction().replace(R.id.container, mCurrentActiveFragment).addToBackStack(menuItem.getTitle().toString()).commit();

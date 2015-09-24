@@ -18,7 +18,7 @@
         <activity android:name=".activities.ChannelActivity" android:label="Channel"/>
         <activity android:name=".activities.SearchActivity"/>
         <activity android:name=".activities.UserActivity"/>
-        <activity android:name=".activities.SettingsActivity"/>
+        <activity android:name=".activities.LicencesActivity"/>
     </application>
 
     <!-- Permissions -->

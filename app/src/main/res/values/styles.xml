@@ -2,6 +2,7 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
         <!-- <item name="android:windowContentOverlay">@null</item> -->
         <!-- COLORS -->
         <item name="colorPrimary">@color/main_blue</item>
@@ -32,7 +33,6 @@
         <item name="searchWidgetCorpusItemBackground">@color/main_green</item>
         -->
     </style>
-
 <!--
     <style name="Text_Display_4">
         <item name="android:textSize">@dimen/font_display4</item>
