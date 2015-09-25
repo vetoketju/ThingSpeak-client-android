@@ -18,6 +18,12 @@ public class SearchFragment extends Fragment implements TabbedFragment {
 
 	ViewPager mViewPager;
 	ViewPagerAdapter mAdapter;
+	ViewPagerReadyListener listener;
+
+	@Override
+	public void setOnViewPagerReadyListener(ViewPagerReadyListener listener) {
+		this.listener = listener;
+	}
 
 	@Override
 	public ViewPager getViewPager() {
@@ -34,7 +40,15 @@ public class SearchFragment extends Fragment implements TabbedFragment {
 		mAdapter.addPage("by user", PublicChannelsFragment.class);
 
 		mViewPager.setAdapter(mAdapter);
+		if (listener != null) listener.onInitTabs(this);
 
 		return v;
+	}
+
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		listener = null;
 	}
 }

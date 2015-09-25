@@ -21,7 +21,7 @@ import com.villevalta.thingspeakclient.fragments.TabbedFragment;
 import com.villevalta.thingspeakclient.ui.dialogs.OpenChannelDialog;
 
 
-public class MainActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener, NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener, NavigationView.OnNavigationItemSelectedListener, TabbedFragment.ViewPagerReadyListener {
 
 	private Toolbar mToolbar;
 	private NavigationView mNavigationView;
@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
 			mNavigationView.setCheckedItem(R.id.public_channels);
 			mNavigationView.getMenu().performIdentifierAction(R.id.public_channels, 0);
 			setTitle(mNavigationView.getMenu().findItem(R.id.public_channels).getTitle());
+			setUpTabs();
 		}else{
 			mCurrentActiveFragment = getSupportFragmentManager().findFragmentById(R.id.container);
 			setUpTabs();
@@ -84,10 +85,24 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
 
 	}
 
+	@Override
+	public void onInitTabs(TabbedFragment source) {
+		if(mCurrentActiveFragment == source){
+			mTabLayout.setVisibility(View.VISIBLE);
+			mTabLayout.setupWithViewPager(source.getViewPager());
+		}else{
+			mTabLayout.setVisibility(View.GONE);
+			mTabLayout.removeAllTabs();
+		}
+	}
+
 	private void setUpTabs() {
 		if(mCurrentActiveFragment != null && mCurrentActiveFragment instanceof TabbedFragment){
-			mTabLayout.setVisibility(View.VISIBLE);
-			mTabLayout.setupWithViewPager(((TabbedFragment) mCurrentActiveFragment).getViewPager());
+			if(((TabbedFragment) mCurrentActiveFragment).getViewPager() != null){
+				onInitTabs((TabbedFragment) mCurrentActiveFragment);
+			}else{
+				((TabbedFragment) mCurrentActiveFragment).setOnViewPagerReadyListener(this);
+			}
 		}else{
 			mTabLayout.setVisibility(View.GONE);
 			mTabLayout.removeAllTabs();
@@ -136,6 +151,7 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
 						mCurrentActiveFragment = SettingsFragment.class.newInstance();
 						break;
 				}
+				skipAdded = true;
 				getSupportFragmentManager().beginTransaction().replace(R.id.container, mCurrentActiveFragment).addToBackStack(menuItem.getTitle().toString()).commit();
 				setUpTabs();
 			}catch (Exception e){
@@ -164,8 +180,13 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
 
 
 	// Backstack functionality
+	boolean skipAdded = false;
 	@Override
 	public void onBackStackChanged() {
+		if(skipAdded){
+			skipAdded = false;
+			return;
+		}
 		if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
 			FragmentManager.BackStackEntry entry = getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1);
 			setTitle(entry.getName());
@@ -175,6 +196,8 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
 					break;
 				}
 			}
+			mCurrentActiveFragment = getSupportFragmentManager().findFragmentById(R.id.container);
+			setUpTabs();
 		}
 	}
 
@@ -191,5 +214,4 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
 			}
 		}
 	}
-
 }
