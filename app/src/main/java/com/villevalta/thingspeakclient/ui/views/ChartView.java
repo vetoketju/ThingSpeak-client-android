@@ -1,6 +1,7 @@
 package com.villevalta.thingspeakclient.ui.views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.MenuItem;
@@ -9,6 +10,7 @@ import android.widget.LinearLayout;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.LineData;
 import com.villevalta.thingspeakclient.R;
+import com.villevalta.thingspeakclient.activities.FullscreenActivity;
 
 /**
  * Created by ville on 11.04.2015.
@@ -17,6 +19,8 @@ public class ChartView extends LinearLayout implements Toolbar.OnMenuItemClickLi
 
     Toolbar mToolbar;
     LineChart mLineChart;
+    private int fieldId = 0;
+    private int channelId = 0;
 
     public ChartView(Context context) {
         super(context);
@@ -50,18 +54,21 @@ public class ChartView extends LinearLayout implements Toolbar.OnMenuItemClickLi
         mLineChart.setDescription("");
         mLineChart.setPinchZoom(false);
         mLineChart.setDoubleTapToZoomEnabled(false);
-
-
     }
 
     public void setTitle(String title){
         if(mToolbar != null) mToolbar.setTitle(title);
     }
 
-
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
-        return false;
+        if(menuItem.getItemId() == R.id.action_chart_fullscreen){
+            Intent i = new Intent(getContext(), FullscreenActivity.class);
+            i.putExtra("channel_id", channelId);
+            i.putExtra("field_id", fieldId);
+            getContext().startActivity(i);
+        }
+        return true;
     }
 
     public void setData(LineData data) {
@@ -71,5 +78,13 @@ public class ChartView extends LinearLayout implements Toolbar.OnMenuItemClickLi
 
         mLineChart.animateX(1000);
         //mLineChart.invalidate();
+    }
+
+    public void setFieldId(int fieldId) {
+        this.fieldId = fieldId;
+    }
+
+    public void setChannelId(int channelId) {
+        this.channelId = channelId;
     }
 }

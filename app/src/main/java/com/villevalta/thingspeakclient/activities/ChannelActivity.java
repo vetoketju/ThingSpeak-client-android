@@ -2,6 +2,7 @@ package com.villevalta.thingspeakclient.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.util.Linkify;
@@ -36,6 +37,7 @@ public class ChannelActivity extends AppCompatActivity implements View.OnClickLi
     ChannelFeed mChannelFeed;
 
     Toolbar mToolbar;
+    CollapsingToolbarLayout mCollapsingToolbar;
 
     // Content views
     View mChannelContentView;
@@ -73,6 +75,7 @@ public class ChannelActivity extends AppCompatActivity implements View.OnClickLi
         mLoadingView = findViewById(R.id.loadingView);
 
         mChannelContentView = findViewById(R.id.channelContentView);
+        mCollapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mDescriptionTextView = (TextView) findViewById(R.id.description);
         mUsernameTextView = (TextView) findViewById(R.id.username);
@@ -160,7 +163,7 @@ public class ChannelActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void updateChannelInfo() {
-        mToolbar.setTitle(mChannelFeed.getChannel().getName());
+        mCollapsingToolbar.setTitle(mChannelFeed.getChannel().getName());
         mDescriptionTextView.setText(mChannelFeed.getChannel().getDescription());
         Linkify.addLinks(mDescriptionTextView, Linkify.ALL);
         mUsernameTextView.setText("By " + mChannelFeed.getChannel().getUsername());
@@ -175,6 +178,8 @@ public class ChannelActivity extends AppCompatActivity implements View.OnClickLi
     private void setupChart(int index){
         if (mChannelFeed.getChannel().getField(index) != null && !mChannelFeed.getChannel().getField(index).equals("")) {
             getChart(index).setVisibility(View.VISIBLE);
+            getChart(index).setChannelId(mChannelId);
+            getChart(index).setFieldId(index);
             getChart(index).setTitle(mChannelFeed.getChannel().getField(index));
             LineData data = mChannelFeed.getLineData(index);
 
@@ -199,7 +204,7 @@ public class ChannelActivity extends AppCompatActivity implements View.OnClickLi
             case 7: return mChart7;
             case 8: return mChart8;
 
-            default:return null;
+            default: return null;
         }
     }
 

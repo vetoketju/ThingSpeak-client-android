@@ -25,6 +25,7 @@ public class ApiClient {
 	private static final String ENDPOINT_CHANNELS = "channels";
 	private static final String ENDPOINT_USERS = "users";
 	private static final String ENDPOINT_FEEDS = "feeds";
+	private static final String ENDPOINT_FIELDS = "fields";
 	private static final String MARKUP = ".json";
 
 
@@ -73,6 +74,11 @@ public class ApiClient {
 
 		@GET("/" + ENDPOINT_CHANNELS + "/" +"{id}" +"/" + ENDPOINT_FEEDS + MARKUP)
 		void getChannelFeed(@Path("id") int id, @Query("api_key") String apiKey, @QueryMap Map<String, String> parameters, Callback<ChannelFeed> callback);
+
+		// Channel Field Feed
+
+		@GET("/" + ENDPOINT_CHANNELS + "/" + "{channelId}" + "/" + ENDPOINT_FIELDS + "/" + "{fieldId}" + MARKUP)
+		void getChannelFieldFeed(@Path("channelId") int channelId, @Path("fieldId") int fieldId, @Query("api_key") String apiKey, @QueryMap Map<String, String> parameters, Callback<ChannelFeed> callback);
 
 		// User
 
